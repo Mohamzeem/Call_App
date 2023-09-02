@@ -8,4 +8,5 @@ enum FontType {
   medium20,
   medium22,
   medium24,
+  medium60,
 }

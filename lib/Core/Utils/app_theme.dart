@@ -16,7 +16,7 @@ ThemeData appTheme() {
       systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: AppColors.kWhite,
           statusBarIconBrightness: Brightness.dark),
-      // backgroundColor: AppColors.kWhite,
+      // backgroundColor: AppColorsDark.mainBg,
       elevation: 0,
       centerTitle: false,
       // iconTheme: IconThemeData(color: AppColorsDark.contentMain),
@@ -39,7 +39,12 @@ ThemeData appTheme() {
       foregroundColor: AppColors.kWhite,
     ),
     fontFamily: MyApp.config.fontFamily,
-
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(
+        fontSize: 14,
+        color: AppColors.kBlack,
+      ),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.kBlack, elevation: 5),

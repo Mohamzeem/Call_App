@@ -1,3 +1,5 @@
+import 'package:call/Core/App/app_info.dart';
+import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +9,13 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: AppColors.mainColor,
       body: Center(
         child: CustomText(
-          text: 'HOME VIEW',
-          fontType: FontType.medium20,
+          text: MyApp.appName,
+          fontType: FontType.medium60,
+          isTitle: true,
         ),
       ),
     );

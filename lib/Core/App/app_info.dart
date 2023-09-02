@@ -11,7 +11,7 @@ class MyApp {
       sl.get<AppNavigation>().navigatorKey.currentContext!;
 
   static AppConfig get config => sl.get<AppConfig>();
-  static String appName = 'Call';
+  static String appName = 'Call Me';
 
   // static AppLocalizations? get locale => AppLocalizations.of(MyApp.context);
 

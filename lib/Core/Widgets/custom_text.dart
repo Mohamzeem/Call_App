@@ -1,6 +1,7 @@
 import 'package:call/Core/Utils/font_size_scale.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -13,7 +14,7 @@ class CustomText extends StatelessWidget {
   final TextAlign? textAlign;
   final int? maxLines;
   final bool? softWrap;
-  final FontWeight? fontWeight;
+  final bool isTitle;
   const CustomText({
     super.key,
     required this.text,
@@ -26,7 +27,7 @@ class CustomText extends StatelessWidget {
     this.maxLines,
     this.fontType,
     this.softWrap,
-    this.fontWeight,
+    this.isTitle = false,
   });
 
   @override
@@ -35,64 +36,71 @@ class CustomText extends StatelessWidget {
 
     if (fontType == FontType.medium10) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 10,
-          fontWeight: fontWeight,
+          fontSize: 10.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
     } else if (fontType == FontType.medium11) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 11,
-          fontWeight: fontWeight,
+          fontSize: 11.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
     } else if (fontType == FontType.medium12) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 12,
-          fontWeight: fontWeight,
+          fontSize: 12.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
     } else if (fontType == FontType.medium14) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 14,
-          fontWeight: fontWeight,
+          fontSize: 14.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
     } else if (fontType == FontType.medium16) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 16,
-          fontWeight: fontWeight,
+          fontSize: 16.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
     } else if (fontType == FontType.medium18) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 18,
-          fontWeight: fontWeight,
+          fontSize: 18.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
     } else if (fontType == FontType.medium20) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 20,
-          fontWeight: fontWeight,
+          fontSize: 20.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
     } else if (fontType == FontType.medium22) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 22,
-          fontWeight: fontWeight,
+          fontSize: 22.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
     } else if (fontType == FontType.medium24) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 24,
-          fontWeight: fontWeight,
+          fontSize: 24.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
+          color: color,
+          decoration: textDecoration,
+          height: height);
+    } else if (fontType == FontType.medium60) {
+      theme = Theme.of(context).textTheme.displayLarge?.copyWith(
+          fontSize: 60.sp,
+          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
