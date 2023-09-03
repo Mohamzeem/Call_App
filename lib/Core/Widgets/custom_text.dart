@@ -34,23 +34,23 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle? theme;
 
-    if (fontType == FontType.medium10) {
+    if (fontType == FontType.medium28) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 10.sp,
+          fontSize: 28.sp,
           fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
-    } else if (fontType == FontType.medium11) {
+    } else if (fontType == FontType.medium32) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 11.sp,
+          fontSize: 32.sp,
           fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,
           height: height);
-    } else if (fontType == FontType.medium12) {
+    } else if (fontType == FontType.medium36) {
       theme = Theme.of(context).textTheme.displayLarge?.copyWith(
-          fontSize: 12.sp,
+          fontSize: 36.sp,
           fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
           color: color,
           decoration: textDecoration,

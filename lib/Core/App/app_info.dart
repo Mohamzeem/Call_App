@@ -1,4 +1,5 @@
 import 'package:call/Core/App/app_injector.dart';
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/routes/app_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -31,7 +32,6 @@ class MyApp {
 class AppConfig {
   AppConfig();
   final Size designSize = const Size(411.42857142857144, 867.4285714285714);
-  final fontFamily = "Cairo";
 }
 
 // to get system app info and app version build

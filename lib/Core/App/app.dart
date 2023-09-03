@@ -15,19 +15,17 @@ class App extends StatelessWidget {
       designSize: MyApp.config.designSize,
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) {
-        return GestureDetector(
-          onTap: () => MyApp.navigation.unfocus(),
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: MyApp.appName,
-            theme: appTheme(),
-            navigatorKey: sl.get<AppNavigation>().navigatorKey,
-            onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: AppRouter.homeView,
-          ),
-        );
-      },
+      builder: (context, child) => GestureDetector(
+        onTap: () => MyApp.navigation.unfocus(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: MyApp.appName,
+          theme: appTheme(),
+          navigatorKey: sl.get<AppNavigation>().navigatorKey,
+          onGenerateRoute: AppRouter.onGenerateRoute,
+          initialRoute: AppRouter.homeView,
+        ),
+      ),
     );
   }
 }

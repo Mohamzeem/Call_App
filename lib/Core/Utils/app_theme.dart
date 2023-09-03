@@ -1,5 +1,6 @@
 import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Utils/app_colors.dart';
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -38,7 +39,7 @@ ThemeData appTheme() {
       backgroundColor: AppColors.kBlack,
       foregroundColor: AppColors.kWhite,
     ),
-    fontFamily: MyApp.config.fontFamily,
+    fontFamily: AppStrings.fontFamily,
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontSize: 14,
