@@ -1,4 +1,3 @@
-import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_button.dart';
