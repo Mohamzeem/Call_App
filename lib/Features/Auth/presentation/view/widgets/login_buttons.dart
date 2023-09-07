@@ -1,12 +1,18 @@
+import 'package:call/Core/App/app_info.dart';
+import 'package:call/Core/routes/app_routes.dart';
+import 'package:call/Features/Auth/presentation/view/widgets/login_fb_go.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:call/Core/Enums/font_enum.dart';
+import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_button.dart';
 import 'package:call/Core/Widgets/custom_snack_bar.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
+import 'package:call/Core/Widgets/custom_text_button.dart';
 import 'package:call/Features/Auth/presentation/view/widgets/auth_text_form_field.dart';
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginButtons extends StatefulWidget {
   const LoginButtons({
@@ -22,7 +28,7 @@ class _LoginButtonsState extends State<LoginButtons> {
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  /// to switch show password
+// to switch show password
   bool isShowPassword = true;
   void showPassword() {
     setState(() {
@@ -34,11 +40,15 @@ class _LoginButtonsState extends State<LoginButtons> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is LoginSuccessState) {
+        if (state is LoginWithEmailPasswordSuccessState ||
+            state is LoginWithGoogleSuccessState) {
           CustomSnackBar().showSuccessSnackBar(
               context: context, message: 'loggedSuccessfully');
-          //  MyApp.navigation.navigateAndFinish(AppRouter.controlView);
-        } else if (state is LoginFailureState) {
+          MyApp.navigation.navigateAndFinish(AppRouter.registerView);
+        } else if (state is LoginWithEmailPasswordFailureState) {
+          CustomSnackBar()
+              .showErrorSnackBar(context: context, message: state.errMessage);
+        } else if (state is LoginWithGoogleFailureState) {
           CustomSnackBar()
               .showErrorSnackBar(context: context, message: state.errMessage);
         }
@@ -99,8 +109,7 @@ class _LoginButtonsState extends State<LoginButtons> {
                   suffixIconFunction: () => showPassword(),
                 ),
                 const SizedBox(height: 10),
-
-//login button//
+//login button
                 Center(
                   child: Padding(
                     padding: EdgeInsets.only(
@@ -109,31 +118,50 @@ class _LoginButtonsState extends State<LoginButtons> {
                       width: 210,
                       height: 45,
                       text: 'login',
-                      isLoading: state is LoginLoadingState,
+                      isLoading: state is LoginWithEmailPasswordLoadingState,
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           cubit.login(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
+                              email: emailController.text,
+                              password: passwordController.text);
                         }
                       },
                     ),
                   ),
                 ),
-
-                //forgot passwod text button//
-                // Center(
-                //   child: ForgotPasswordTextButton(
-                //     text: MyApp.translate(LangKey.forgotPassword),
-                //     onPressed: () => MyApp.navigation
-                //         .navigateTo(AppRouter.forgotPasswordView),
-
-                //     text: MyApp.translate(LangKey.gool),
-                //     onPressed: () =>
-                //         MyApp.navigation.navigateTo(AppRouter.registerView),
-                //   ),
-                // ),
+                const Row(
+                  children: [
+                    Expanded(child: Divider()),
+                    CustomText(
+                        text: '  Or  ',
+                        isTitle: false,
+                        fontType: FontType.medium32),
+                    Expanded(child: Divider())
+                  ],
+                ),
+//facebook login
+                LoginGoogleFacebook(
+                    title: 'Google',
+                    logo: 'google',
+                    onPressed: () {
+                      cubit.loginWithGoogle();
+                    }),
+//google login
+                LoginGoogleFacebook(
+                    title: 'Facebook', logo: 'facebook', onPressed: () {}),
+                SizedBox(height: 60.h),
+//go to sign in page
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CustomText(
+                        text: 'You Dont Have Account?',
+                        isTitle: false,
+                        fontType: FontType.medium28,
+                        color: AppColors.kGrey),
+                    CustomTextButton(text: 'Sign Up!', onPressed: () {}),
+                  ],
+                )
               ],
             ),
           ),

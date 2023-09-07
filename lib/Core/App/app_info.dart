@@ -1,4 +1,4 @@
-import 'package:call/Core/App/app_injector.dart';
+import 'package:call/Core/App/app_dependecies.dart';
 import 'package:call/Core/routes/app_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';

@@ -27,6 +27,28 @@ class AuthRepoImpl implements AuthRepo {
     }
   }
 
+//loging with google
+  @override
+  Future<Either<String, UserCredential>> loginWithGoogle() async {
+    try {
+      final result = await api.loginWithGoogle();
+      return right(result);
+    } on FirebaseAuthException catch (e) {
+      return left(e.code.toString());
+    }
+  }
+
+  @override
+  Future<void> addGoogleUserDatatoFirebase(
+    String id,
+    String name,
+    String email,
+    String photoUrl,
+  ) {
+    final result = api.addGoogleUserDatatoFirebase(id, name, email, photoUrl);
+    return result;
+  }
+
 //There is no user record corresponding to this identifier. The user may have been deleted.
   @override
   Future<Either<String, Unit>> forgotPassword({required String email}) async {

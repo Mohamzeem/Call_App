@@ -14,22 +14,41 @@ class AuthCubit extends Cubit<AuthState> {
 
 // login get UserCredential
   Future login({required String email, required String password}) async {
-    emit(LoginLoadingState());
+    emit(LoginWithEmailPasswordLoadingState());
     final result = await repo.login(
       email: email,
       password: password,
     );
     result.fold(
-        (failure) => emit(LoginFailureState(errMessage: failure.toString())),
+        (failure) => emit(
+            LoginWithEmailPasswordFailureState(errMessage: failure.toString())),
         (user) async {
       //save id in shared pref
-      SharedPref().setString(PrefKeys.userId, user.user!.uid);
-      AppStrings.userId = SharedPref().getString(PrefKeys.userId);
+      SharedPref().setString(key: PrefKeys.userId, stringValue: user.user!.uid);
+      AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
       //refresh tokenFcm
       //  await refreshTokenFcmAndRoomId(user.user!.uid);
-      return emit(LoginSuccessState(user: user));
+      return emit(LoginWithEmailPasswordSuccessState(user: user));
     });
   }
+
+//login with google
+  Future loginWithGoogle() async {
+    emit(LoginWithGoogleLoadingState());
+    final result = await repo.loginWithGoogle();
+    result.fold(
+        (failure) => emit(
+            LoginWithEmailPasswordFailureState(errMessage: failure.toString())),
+        (user) async {
+      await repo.addGoogleUserDatatoFirebase(user.user!.uid,
+          user.user!.displayName!, user.user!.email!, user.user!.photoURL!);
+      SharedPref().setString(key: PrefKeys.userId, stringValue: user.user!.uid);
+      AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
+      return emit(LoginWithGoogleSuccessState(user: user));
+    });
+  }
+
+//add user data in firebase
 
   // Future<void> refreshTokenFcmAndRoomId(String userId) async {
   //   String? token = await FirebaseMessaging.instance.getToken();
@@ -72,7 +91,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> logOut() async {
     emit(LogOutLoadingState());
     await FirebaseAuth.instance.signOut();
-    SharedPref().removePreference(PrefKeys.userId);
+    SharedPref().removePreference(key: PrefKeys.userId);
     emit(LogoutSuccessState());
   }
 }

@@ -2,7 +2,7 @@ class AppStrings {
   AppStrings();
 
   static String fontFamily = 'MouseMemoirs';
-  static const String defaultEmail = '@hsa.com.ye';
+  static const String defaultEmail = '@gmail.com';
   static String? userId = '';
   static String? role = '';
 

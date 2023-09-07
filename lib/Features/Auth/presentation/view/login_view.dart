@@ -1,4 +1,4 @@
-import 'package:call/Core/App/app_injector.dart';
+import 'package:call/Core/App/app_dependecies.dart';
 import 'package:call/Features/Auth/data/repo/auth_repo_impl.dart';
 import 'package:call/Features/Auth/presentation/view/widgets/auth_body.dart';
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';

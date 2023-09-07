@@ -1,5 +1,6 @@
 import 'package:call/Core/App/app_info.dart';
-import 'package:call/Core/App/app_injector.dart';
+import 'package:call/Core/App/app_dependecies.dart';
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Utils/app_theme.dart';
 import 'package:call/Core/routes/app_navigation.dart';
 import 'package:call/Core/routes/app_routes.dart';
@@ -23,7 +24,9 @@ class App extends StatelessWidget {
           theme: appTheme(),
           navigatorKey: sl.get<AppNavigation>().navigatorKey,
           onGenerateRoute: AppRouter.onGenerateRoute,
-          initialRoute: AppRouter.homeView,
+          initialRoute: AppStrings.userId != null
+              ? AppRouter.registerView
+              : AppRouter.loginView,
         ),
       ),
     );

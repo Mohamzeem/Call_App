@@ -13,24 +13,42 @@ class AuthInitialState extends AuthState {
   List<Object> get props => [];
 }
 
-//lgoin states//
-class LoginLoadingState extends AuthState {
+//login with email and password
+class LoginWithEmailPasswordLoadingState extends AuthState {
   @override
   List<Object> get props => [];
 }
 
-class LoginSuccessState extends AuthState {
+class LoginWithEmailPasswordSuccessState extends AuthState {
   final UserCredential user;
-
-  const LoginSuccessState({required this.user});
+  const LoginWithEmailPasswordSuccessState({required this.user});
   @override
   List<Object> get props => [user];
 }
 
-class LoginFailureState extends AuthState {
+class LoginWithEmailPasswordFailureState extends AuthState {
   final String errMessage;
+  const LoginWithEmailPasswordFailureState({required this.errMessage});
+  @override
+  List<Object> get props => [errMessage];
+}
 
-  const LoginFailureState({required this.errMessage});
+//login with google
+class LoginWithGoogleLoadingState extends AuthState {
+  @override
+  List<Object> get props => [];
+}
+
+class LoginWithGoogleSuccessState extends AuthState {
+  final UserCredential user;
+  const LoginWithGoogleSuccessState({required this.user});
+  @override
+  List<Object> get props => [user];
+}
+
+class LoginWithGoogleFailureState extends AuthState {
+  final String errMessage;
+  const LoginWithGoogleFailureState({required this.errMessage});
   @override
   List<Object> get props => [errMessage];
 }

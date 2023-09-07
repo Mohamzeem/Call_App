@@ -1,19 +1,23 @@
 import 'package:call/Core/routes/base_routes.dart';
 import 'package:call/Features/Auth/presentation/view/login_view.dart';
+import 'package:call/Features/Register/presentation/view/register_view.dart';
 import 'package:call/Features/Splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppRouter {
-  static const String homeView = "homeView";
+  static const String splashView = "splashView";
   static const String loginView = "loginView";
+  static const String registerView = "registerView";
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     var args = settings.arguments;
     switch (settings.name) {
-      case homeView:
+      case splashView:
         return BaseRoute(const SplashView());
       case loginView:
         return BaseRoute(const LoginView());
+      case registerView:
+        return BaseRoute(const RegisterView());
       // case forgotPasswordView:
       //   return BaseRoute(const ForgotPasswordView());
       // case controlView:

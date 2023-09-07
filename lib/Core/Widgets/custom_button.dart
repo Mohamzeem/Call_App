@@ -60,7 +60,7 @@ class CustomButton extends StatelessWidget {
                 width: loadingWidth!,
               )
             : CustomText(
-                fontType: fontType ?? FontType.medium24,
+                fontType: fontType ?? FontType.medium28,
                 text: text,
                 color: textColor ?? AppColors.kWhite,
                 textAlign: textAlign,
