@@ -20,7 +20,7 @@ class CustomSnackBar {
         content: Center(
           child: CustomText(
             text: message,
-            fontType: FontType.medium18,
+            fontType: FontType.medium24,
           ),
         ),
         backgroundColor: Colors.greenAccent,
@@ -45,7 +45,7 @@ class CustomSnackBar {
         content: Center(
           child: CustomText(
             text: message,
-            fontType: FontType.medium18,
+            fontType: FontType.medium24,
           ),
         ),
         backgroundColor: Colors.redAccent,

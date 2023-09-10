@@ -6,5 +6,6 @@ abstract class RegisterRepo {
   Future<Either<String, UserCredential>> register(
       {required String email, required String password});
 
-  Future<void> addUserDatatoFirebase(String id, String name, String email);
+  Future<Either<String, Unit>> addUserDatatoFirebase(
+      String id, String name, String email);
 }

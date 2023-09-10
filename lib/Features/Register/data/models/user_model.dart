@@ -8,6 +8,7 @@ class UserModel extends Equatable {
   final String? mobileNum;
   final String? tokenFcm;
   final bool? isLoged;
+  final bool? isOnline;
 
   const UserModel({
     this.id,
@@ -17,21 +18,23 @@ class UserModel extends Equatable {
     this.mobileNum,
     this.tokenFcm,
     this.isLoged,
+    this.isOnline,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'] ?? '',
-      photo: json['photo'] ?? '',
-      name: json['name'] ?? '',
-      email: json['email'] ?? '',
-      mobileNum: json['mobileNum'] ?? '',
-      tokenFcm: json['tokenFcm'] ?? '',
+      id: json['id'] ?? "",
+      photo: json['photo'] ?? "",
+      name: json['name'] ?? "",
+      email: json['email'] ?? "",
+      mobileNum: json['mobileNum'] ?? "",
+      tokenFcm: json['tokenFcm'] ?? "",
       isLoged: json['isLoged'] ?? false,
+      isOnline: json['isOnline'] ?? false,
     );
   }
 
-  Map<String, dynamic> toJson({required String id, required String tokenFcm}) {
+  Map<String, dynamic> toJson({String? id, String? tokenFcm}) {
     return <String, dynamic>{
       'id': id,
       'photo': photo ?? "",
@@ -40,6 +43,7 @@ class UserModel extends Equatable {
       'mobileNum': mobileNum ?? "",
       'tokenFcm': tokenFcm,
       'isLoged': true,
+      'isOnline': true,
     };
   }
 
@@ -59,7 +63,7 @@ class UserModel extends Equatable {
 
   String get isPhoto {
     if (photo!.isEmpty) {
-      return '';
+      return "";
     }
     return photo!;
   }

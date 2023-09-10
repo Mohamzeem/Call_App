@@ -42,7 +42,7 @@ class _SplashViewState extends State<SplashView> {
           SizedBox(height: 150.h),
           Center(
             child: Image.asset(
-              'assets/images/cell-phone.png',
+              'assets/images/ring-ring.png',
               height: 300,
             ),
           ),

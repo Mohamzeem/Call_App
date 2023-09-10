@@ -17,10 +17,12 @@ class LoginGoogleFacebook extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+//~logo
         Image.asset(
           'assets/images/$logo.png',
           scale: 3.5,
         ),
+//~title
         CustomTextButton(
           text: 'Login with $title',
           onPressed: onPressed,

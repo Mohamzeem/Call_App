@@ -12,6 +12,13 @@ class RegisterInitialState extends RegisterState {
   List<Object> get props => [];
 }
 
+//~switch show password state
+class SwitchShowPasswordState extends RegisterState {
+  @override
+  List<Object> get props => [];
+}
+
+//~register with email and password state
 class RegisterloadingState extends RegisterState {
   @override
   List<Object> get props => [];

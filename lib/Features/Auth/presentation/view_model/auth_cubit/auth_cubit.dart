@@ -12,7 +12,7 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepoImpl repo;
   AuthCubit({required this.repo}) : super(AuthInitialState());
 
-// login get UserCredential
+//~login with email and password and saver user id in sharedpreferences
   Future login({required String email, required String password}) async {
     emit(LoginWithEmailPasswordLoadingState());
     final result = await repo.login(
@@ -23,16 +23,16 @@ class AuthCubit extends Cubit<AuthState> {
         (failure) => emit(
             LoginWithEmailPasswordFailureState(errMessage: failure.toString())),
         (user) async {
-      //save id in shared pref
+//~save id in shared pref
       SharedPref().setString(key: PrefKeys.userId, stringValue: user.user!.uid);
       AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
-      //refresh tokenFcm
-      //  await refreshTokenFcmAndRoomId(user.user!.uid);
+//!refresh tokenFcm
+      //!  await refreshTokenFcmAndRoomId(user.user!.uid);
       return emit(LoginWithEmailPasswordSuccessState(user: user));
     });
   }
 
-//login with google
+//~login with google and saver user data to firebase
   Future loginWithGoogle() async {
     emit(LoginWithGoogleLoadingState());
     final result = await repo.loginWithGoogle();
@@ -48,37 +48,8 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-//add user data in firebase
-
-  // Future<void> refreshTokenFcmAndRoomId(String userId) async {
-  //   String? token = await FirebaseMessaging.instance.getToken();
-  //   int roomId = userId.hashCode;
-  //   final result =
-  //       await FirebaseFirestore.instance.collection('').doc(userId).get();
-
-  //   var userProfile = UserDetailsModel.fromJson(result.data()!);
-  //   //refrshToken In Profile
-  //   await FirebaseFirestore.instance
-  //       .collection(AppStrings.profileCollection)
-  //       .doc(userId)
-  //       .update({'tokenFcm': token, 'roomId': roomId});
-
-  //   if (userProfile.role == 'Coach') {
-  //     await FirebaseFirestore.instance
-  //         .collection(AppStrings.coachesCollection)
-  //         .doc(userId)
-  //         .update({"tokenFcm": token, 'roomId': roomId});
-  //   }
-  //   if (userProfile.role == 'Employee') {
-  //     await FirebaseFirestore.instance
-  //         .collection(AppStrings.employeesCollection)
-  //         .doc(userId)
-  //         .update({"tokenFcm": token, 'roomId': roomId});
-  //   }
-  // }
-
-//forgot Password
-  Future<void> forgotPassword({required String email}) async {
+//~forgot Password
+  Future forgotPassword({required String email}) async {
     emit(ForgotPasswordLoadingState());
     final result = await repo.forgotPassword(email: email);
     result.fold(
@@ -87,11 +58,41 @@ class AuthCubit extends Cubit<AuthState> {
         (unit) => emit(ForgotPasswordSuccessState()));
   }
 
-//logOut
-  Future<void> logOut() async {
-    emit(LogOutLoadingState());
-    await FirebaseAuth.instance.signOut();
-    SharedPref().removePreference(key: PrefKeys.userId);
-    emit(LogoutSuccessState());
-  }
+//~logOut
+  // Future<void> logOut() async {
+  //   emit(LogOutLoadingState());
+  //   await FirebaseAuth.instance.signOut();
+  //   SharedPref().removePreference(key: PrefKeys.userId);
+  //   AppStrings.userId = '';
+  //   emit(LogoutSuccessState());
+  // }
 }
+
+/*
+  Future<void> refreshTokenFcmAndRoomId(String userId) async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    int roomId = userId.hashCode;
+    final result =
+        await FirebaseFirestore.instance.collection('').doc(userId).get();
+
+    var userProfile = UserDetailsModel.fromJson(result.data()!);
+    //refrshToken In Profile
+    await FirebaseFirestore.instance
+        .collection(AppStrings.profileCollection)
+        .doc(userId)
+        .update({'tokenFcm': token, 'roomId': roomId});
+
+    if (userProfile.role == 'Coach') {
+      await FirebaseFirestore.instance
+          .collection(AppStrings.coachesCollection)
+          .doc(userId)
+          .update({"tokenFcm": token, 'roomId': roomId});
+    }
+    if (userProfile.role == 'Employee') {
+      await FirebaseFirestore.instance
+          .collection(AppStrings.employeesCollection)
+          .doc(userId)
+          .update({"tokenFcm": token, 'roomId': roomId});
+    }
+  }
+  */

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,7 @@ class RegisterTextField extends StatelessWidget {
       keyboardType: keyboardType,
       style: Theme.of(context).textTheme.displayLarge?.copyWith(
             color: AppColors.kBlack,
-            fontSize: 14,
+            fontSize: 18,
           ),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(

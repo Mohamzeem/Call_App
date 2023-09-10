@@ -30,12 +30,16 @@ class RegisterRepoImpl implements RegisterRepo {
   }
 
   @override
-  Future<void> addUserDatatoFirebase(
+  Future<Either<String, Unit>> addUserDatatoFirebase(
     String id,
     String name,
     String email,
-  ) {
-    final result = api.addUserDatatoFirebase(id, name, email);
-    return result;
+  ) async {
+    try {
+      await api.addUserDatatoFirebase(id, name, email);
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
+      return left(e.message.toString());
+    }
   }
 }

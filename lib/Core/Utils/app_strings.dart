@@ -7,8 +7,9 @@ class AppStrings {
   static String? role = '';
 
   //Firebase Collections
+  static const String usersCollection = 'Users';
   static const String profileCollection = 'Profile';
-  static const String coachesCollection = 'Coaches';
+  static const String profileDetailsDoc = 'profileDetails';
   static const String coachingSessionsCollection = 'Coaching Sessions';
   static const String fastCoachingSessionsCollection = 'Fast Coaching Sessions';
   static const String employeesCollection = 'Employees';

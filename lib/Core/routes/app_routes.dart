@@ -1,5 +1,7 @@
 import 'package:call/Core/routes/base_routes.dart';
 import 'package:call/Features/Auth/presentation/view/login_view.dart';
+import 'package:call/Features/Control/presentation/view/control_view.dart';
+import 'package:call/Features/Profile/presentation/view/profile_view.dart';
 import 'package:call/Features/Register/presentation/view/register_view.dart';
 import 'package:call/Features/Splash/presentation/view/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,8 @@ abstract class AppRouter {
   static const String splashView = "splashView";
   static const String loginView = "loginView";
   static const String registerView = "registerView";
+  static const String controlView = "controlView";
+  static const String profileView = "profileView";
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     var args = settings.arguments;
@@ -18,12 +22,17 @@ abstract class AppRouter {
         return BaseRoute(const LoginView());
       case registerView:
         return BaseRoute(const RegisterView());
-      // case forgotPasswordView:
-      //   return BaseRoute(const ForgotPasswordView());
-      // case controlView:
-      //   return BaseRoute(const ControlView());
-      // case coachProfileView:
-      //   return BaseRoute(CoachProfileView(
+      case controlView:
+        return BaseRoute(const ControlView());
+      case profileView:
+        return BaseRoute(const ProfileView());
+
+      default:
+        return BaseRoute(const SplashView());
+    }
+  }
+}
+   //   return BaseRoute(CoachProfileView(
       //     userDetailsModel: args as UserDetailsModel,
       //   ));
       // case categoryView:
@@ -35,18 +44,12 @@ abstract class AppRouter {
       //   ));
       // case aiSearchView:
       //   return BaseRoute(AiSearchView(chatText: args as String));
-      // case growModelView:
-      //   return BaseRoute(const GrowModView());
-      // case growModelDetailsView:
-      //   return BaseRoute(const DetailsGrowModView());
+
       // case ratingView:
       //   return BaseRoute(RatingView(
       //     userCallId: args as String,
       //   ));
-      // case profileView:
-      //   return BaseRoute(const ProfileView());
-      // case registerView:
-      //   return BaseRoute(const RegisterView());
+
       // case fastCoachingWebView:
       //   return BaseRoute(FastCoachingWebView(url: args as String));
 
@@ -54,15 +57,3 @@ abstract class AppRouter {
       //   return BaseRoute(ProfileEditView(
       //     userModel: args as UserDetailsModel,
       //   ));
-
-      // case updatePasswordView:
-      //   return BaseRoute(const UpdatePasswordView());
-
-      // case notificationsView:
-      //   return BaseRoute(const NotificationsView());
-
-      default:
-        return BaseRoute(const SplashView());
-    }
-  }
-}

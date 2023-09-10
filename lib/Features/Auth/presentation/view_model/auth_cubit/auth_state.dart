@@ -13,7 +13,7 @@ class AuthInitialState extends AuthState {
   List<Object> get props => [];
 }
 
-//login with email and password
+//~login with email and password
 class LoginWithEmailPasswordLoadingState extends AuthState {
   @override
   List<Object> get props => [];
@@ -33,7 +33,7 @@ class LoginWithEmailPasswordFailureState extends AuthState {
   List<Object> get props => [errMessage];
 }
 
-//login with google
+//~login with google
 class LoginWithGoogleLoadingState extends AuthState {
   @override
   List<Object> get props => [];
@@ -53,7 +53,7 @@ class LoginWithGoogleFailureState extends AuthState {
   List<Object> get props => [errMessage];
 }
 
-//logOut states//
+//~logOut states
 class LogoutSuccessState extends AuthState {
   @override
   List<Object> get props => [];
@@ -64,7 +64,7 @@ class LogOutLoadingState extends AuthState {
   List<Object> get props => [];
 }
 
-//forgot password states//
+//~forgot password states
 class ForgotPasswordLoadingState extends AuthState {
   @override
   List<Object> get props => [];

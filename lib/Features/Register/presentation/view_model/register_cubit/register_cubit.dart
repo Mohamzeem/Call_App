@@ -19,10 +19,12 @@ class RegisterCubit extends Cubit<RegisterState> {
     result.fold(
         (failure) => emit(RegisterFailureState(errMessage: failure.toString())),
         (user) {
-      final id = user.user!.uid; //userid == Uid from firebase
-      repo.addUserDatatoFirebase(id, name, email); //save user data in firebase
+//~ userid = Uid from firebase
+      final id = user.user!.uid;
+//~ save user data in firebase
+      repo.addUserDatatoFirebase(id, name, email);
       emit(RegisterSuccessState(user: user));
-//save user data in firebase usercredential
+//~ save user data in firebase usercredential
       final currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
         name = currentUser.displayName!;

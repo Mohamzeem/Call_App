@@ -1,23 +1,27 @@
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthApi {
   final firestore = FirebaseFirestore.instance;
+  final auth = FirebaseAuth.instance;
+  UserModel? userModel;
 
-  // login in
+//~ login in with email and password
   Future<UserCredential> login(
       {required String email, required String password}) async {
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: "$email.trim()",
+    UserCredential userCredential = await auth.signInWithEmailAndPassword(
+      email: email.trim(),
       password: password.trim(),
     );
     return userCredential;
   }
 
+//~ login in with google
   Future<UserCredential> loginWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication? googleAuth =
@@ -26,10 +30,11 @@ class AuthApi {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    return await auth.signInWithCredential(credential);
   }
 
-  addGoogleUserDatatoFirebase(
+//~ add google user data to Firebase
+  Future<Unit> addGoogleUserDatatoFirebase(
     String id,
     String name,
     String email,
@@ -39,20 +44,19 @@ class AuthApi {
     final userModel =
         UserModel(id: id, name: name, email: email, photo: photoUrl);
     await firestore
-        .collection('Users')
+        .collection(AppStrings.usersCollection)
         .doc(id)
-        .collection('Profile')
-        .doc('profileDetails')
+        .collection(AppStrings.profileCollection)
+        .doc(AppStrings.profileDetailsDoc)
         .set(userModel.toJson(id: id, tokenFcm: token!));
+    return unit;
   }
 
-//forgot password
-  Future forgotPassword({required String email}) async {
-    await FirebaseAuth.instance.sendPasswordResetEmail(
-      email: "$email.trim()",
-    );
-    return;
+//~ forgot password
+  Future<Unit> forgotPassword({required String email}) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: "$email.trim()");
+    return unit;
   }
 
-  // Get User Profile To get Role And Refresh TokeFmc
+//~ Get User Profile To get Role And Refresh TokeFmc
 }

@@ -8,7 +8,6 @@ class AuthRepoImpl implements AuthRepo {
 
   AuthRepoImpl({required this.api});
 
-//Login
   @override
   Future<Either<String, UserCredential>> login(
       {required String email, required String password}) async {
@@ -27,7 +26,6 @@ class AuthRepoImpl implements AuthRepo {
     }
   }
 
-//loging with google
   @override
   Future<Either<String, UserCredential>> loginWithGoogle() async {
     try {
@@ -39,17 +37,20 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<void> addGoogleUserDatatoFirebase(
+  Future<Either<String, Unit>> addGoogleUserDatatoFirebase(
     String id,
     String name,
     String email,
     String photoUrl,
-  ) {
-    final result = api.addGoogleUserDatatoFirebase(id, name, email, photoUrl);
-    return result;
+  ) async {
+    try {
+      await api.addGoogleUserDatatoFirebase(id, name, email, photoUrl);
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
+      return left(e.code.toString());
+    }
   }
 
-//There is no user record corresponding to this identifier. The user may have been deleted.
   @override
   Future<Either<String, Unit>> forgotPassword({required String email}) async {
     try {
