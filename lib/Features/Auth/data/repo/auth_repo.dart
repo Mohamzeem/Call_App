@@ -6,6 +6,7 @@ abstract class AuthRepo {
       {required String email, required String password});
 
   Future<Either<String, UserCredential>> loginWithGoogle();
+  Future<Either<String, Unit>> updateUserStatus();
 
   Future<Either<String, Unit>> addGoogleUserDatatoFirebase(
       String id, String name, String email, String photo);

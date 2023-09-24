@@ -56,8 +56,8 @@ class _LoginButtonsState extends State<LoginButtons> {
       listener: (context, state) {
         if (state is RegisterSuccessState) {
           CustomSnackBar().showSuccessSnackBar(
-              context: context, message: 'تمت الاضافة بنجاح');
-          MyApp.navigation.navigateAndFinish(AppRouter.homeView);
+              context: context, message: 'Registerd Successfully');
+          MyApp.navigation.navigateAndFinish(AppRouter.loginView);
         } else if (state is RegisterFailureState) {
           CustomSnackBar()
               .showErrorSnackBar(context: context, message: state.errMessage);
@@ -86,13 +86,13 @@ class _LoginButtonsState extends State<LoginButtons> {
                 RegisterTextField(
                   maxLength: 50,
                   controller: nameController,
-                  hint: 'الأسم',
+                  hint: 'Full Name',
                   keyboardType: TextInputType.name,
                   validator: (String value) {
                     if (value.isEmpty) {
-                      return 'يرجي ادخال الاسم بالكامل';
+                      return 'Please enter a full name';
                     } else if (value.length < 3) {
-                      return 'idNumbeR6';
+                      return 'too low characters';
                     }
                   },
                 ),
@@ -100,13 +100,13 @@ class _LoginButtonsState extends State<LoginButtons> {
                 RegisterTextField(
                   maxLength: 50,
                   controller: emailController,
-                  hint: 'الرقم التعريفي 123456',
+                  hint: 'Email address',
                   keyboardType: TextInputType.name,
                   validator: (String value) {
                     if (value.isEmpty) {
                       return 'epmtyId';
-                    } else if (value.length < 6) {
-                      return 'idNumbeR6';
+                    } else if (value.length < 4) {
+                      return 'too low characters';
                     }
                   },
                 ),
@@ -114,13 +114,13 @@ class _LoginButtonsState extends State<LoginButtons> {
                 RegisterTextField(
                   maxLength: 6,
                   controller: passwordController,
-                  hint: 'password',
+                  hint: 'Password',
                   keyboardType: TextInputType.name,
                   validator: (String value) {
                     if (value.isEmpty) {
-                      return 'epmtyPassword';
+                      return 'emptyPassword';
                     } else if (value.length < 6) {
-                      return 'password6';
+                      return 'low password';
                     }
                   },
                 ),
@@ -138,8 +138,8 @@ class _LoginButtonsState extends State<LoginButtons> {
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           cubit.register(
-                            email: emailController.text.trim(),
-                            password: passwordController.text.trim(),
+                            email: emailController.text,
+                            password: passwordController.text,
                             name: nameController.text.trim(),
                           );
                         }

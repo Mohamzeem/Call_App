@@ -15,7 +15,7 @@ class AuthApi {
   Future<UserCredential> login(
       {required String email, required String password}) async {
     UserCredential userCredential = await auth.signInWithEmailAndPassword(
-      email: email.trim(),
+      email: "${email.trim()}${AppStrings.defaultEmail}",
       password: password.trim(),
     );
     return userCredential;
@@ -31,6 +31,17 @@ class AuthApi {
       idToken: googleAuth?.idToken,
     );
     return await auth.signInWithCredential(credential);
+  }
+
+//~ update user status in firebase
+  Future updateUserStatus() async {
+    final id = auth.currentUser!.uid;
+    await firestore
+        .collection(AppStrings.usersCollection)
+        .doc(id)
+        .collection(AppStrings.profileCollection)
+        .doc(AppStrings.profileDetailsDoc)
+        .update({'isLoged': true, 'isOnline': true});
   }
 
 //~ add google user data to Firebase

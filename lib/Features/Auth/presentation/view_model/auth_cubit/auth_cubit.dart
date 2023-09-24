@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:call/Core/Services/prints/prints_service.dart';
 import 'package:call/Core/Services/shared_prefs/pref_key.dart';
 import 'package:call/Core/Services/shared_prefs/shared_pref.dart';
@@ -7,6 +6,7 @@ import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Features/Auth/data/repo/auth_repo_impl.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_state.dart';
@@ -15,7 +15,7 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepoImpl repo;
   AuthCubit({required this.repo}) : super(AuthInitialState());
 
-//~login with email and password and saver user id in sharedpreferences
+//~ login with email and password and saver user id in sharedpreferences
   Future login({required String email, required String password}) async {
     emit(LoginWithEmailPasswordLoadingState());
     final result = await repo.login(
@@ -26,17 +26,17 @@ class AuthCubit extends Cubit<AuthState> {
         (failure) => emit(
             LoginWithEmailPasswordFailureState(errMessage: failure.toString())),
         (user) async {
-//~save id in shared pref
+//^ save user Id in shared pref..
       SharedPref().setString(key: PrefKeys.userId, stringValue: user.user!.uid);
       AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
+      await repo.updateUserStatus();
 //! refresh tokenFcm
       //!  await refreshTokenFcmAndRoomId(user.user!.uid);
-      Prints.success(endPoint: 'Loged in Successfully', message: '$user');
       return emit(LoginWithEmailPasswordSuccessState(user: user));
     });
   }
 
-//~login with google and saver user data to firebase
+//~ login with google and saver user data to firebase
   Future loginWithGoogle() async {
     emit(LoginWithGoogleLoadingState());
     final result = await repo.loginWithGoogle();
@@ -46,17 +46,16 @@ class AuthCubit extends Cubit<AuthState> {
         (user) async {
       await repo.addGoogleUserDatatoFirebase(user.user!.uid,
           user.user!.displayName!, user.user!.email!, user.user!.photoURL!);
-      //^ save user model in database..
-      SharedPref()
-          .setString(key: PrefKeys.userId, stringValue: jsonEncode(user));
+//^ save user Id in shared pref..
       SharedPref().setString(key: PrefKeys.userId, stringValue: user.user!.uid);
       AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
       Prints.success(endPoint: 'Loged in Successfully', message: '$user');
+      await repo.updateUserStatus();
       return emit(LoginWithGoogleSuccessState(user: user));
     });
   }
 
-//~forgot Password
+//~ forgot Password
   Future forgotPassword({required String email}) async {
     emit(ForgotPasswordLoadingState());
     final result = await repo.forgotPassword(email: email);

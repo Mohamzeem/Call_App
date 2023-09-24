@@ -37,6 +37,16 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
+  Future<Either<String, Unit>> updateUserStatus() async {
+    try {
+      await api.updateUserStatus();
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
+      return left(e.code.toString());
+    }
+  }
+
+  @override
   Future<Either<String, Unit>> addGoogleUserDatatoFirebase(
     String id,
     String name,

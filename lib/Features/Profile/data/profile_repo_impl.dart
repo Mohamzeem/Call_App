@@ -20,9 +20,9 @@ class ProfileRepoImpl extends ProfileRepo {
   }
 
   @override
-  Future<Either<String, Unit>> logOutUpdateprofile(String id) async {
+  Future<Either<String, Unit>> logOutUpdateprofile() async {
     try {
-      await api.logOutUpdateprofile(id);
+      await api.logOutUpdateprofile();
       return right(unit);
     } on FirebaseException catch (e) {
       return left(e.code.toString());

@@ -1,6 +1,7 @@
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
+import 'package:call/Core/Widgets/custom_dialog.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:call/Core/App/app_info.dart';
@@ -10,9 +11,7 @@ import 'package:call/Features/Profile/presentation/view_model.dart/cubit/profile
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Logout extends StatelessWidget {
-  const Logout({
-    super.key,
-  });
+  const Logout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class Logout extends StatelessWidget {
             fontType: FontType.medium22,
             color: AppColors.mainColor,
           ),
-          BlocListener<ProfileCubit, ProfileState>(
+          BlocConsumer<ProfileCubit, ProfileState>(
             listener: (context, state) {
               if (state is ProfileLogOutFailureState) {
                 CustomSnackBar().showErrorSnackBar(
@@ -35,13 +34,22 @@ class Logout extends StatelessWidget {
               } else if (state is ProfileLogOutSuccessState) {
                 MyApp.navigation.navigateAndFinish(AppRouter.loginView);
                 CustomSnackBar().showSuccessSnackBar(
-                    context: context, message: 'Log Out Successfully');
+                    context: context, message: 'Loged Out Successfully');
               }
             },
-            child: InkWell(
-              onTap: () => BlocProvider.of<ProfileCubit>(context).logOut(),
-              child: const Icon(Icons.arrow_back_ios_new),
-            ),
+            builder: (context, state) {
+              return InkWell(
+                onTap: () => CustomDialog.twoButtonDialog(
+                    context: context,
+                    textBody: 'Are you sure you want to log out',
+                    textButton1: 'Yes',
+                    textButton2: 'No',
+                    onPressed: () =>
+                        BlocProvider.of<ProfileCubit>(context).logOut(),
+                    isLoading: state is ProfileLogOutLoadingState),
+                child: const Icon(Icons.arrow_back_ios_new),
+              );
+            },
           )
         ],
       ),

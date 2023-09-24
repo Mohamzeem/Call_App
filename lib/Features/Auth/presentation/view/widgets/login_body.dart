@@ -1,4 +1,5 @@
 import 'package:call/Core/App/app_info.dart';
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/routes/app_routes.dart';
 import 'package:call/Features/Auth/presentation/view/widgets/login_facebook_google.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class _LoginBodyState extends State<LoginBody> {
         if (state is LoginWithEmailPasswordSuccessState ||
             state is LoginWithGoogleSuccessState) {
           CustomSnackBar().showSuccessSnackBar(
-              context: context, message: 'logged Successfully');
+              context: context, message: 'loged in Successfully');
           MyApp.navigation.navigateAndFinish(AppRouter.homeView);
         } else if (state is LoginWithEmailPasswordFailureState) {
           CustomSnackBar()
@@ -97,10 +98,11 @@ class _LoginBodyState extends State<LoginBody> {
                         validator: (String value) {
                           if (value.isEmpty) {
                             return 'empty email';
-                          } else if (!value.contains('@') &&
-                              !value.contains('.com')) {
-                            return 'not valid email';
                           }
+                          // else if (!value.contains('@') &&
+                          //     !value.contains('.com')) {
+                          //   return 'not valid email';
+                          // }
                         },
                         suffixIconShow: false,
                       ),
@@ -138,8 +140,9 @@ class _LoginBodyState extends State<LoginBody> {
                             onPressed: () async {
                               if (formKey.currentState!.validate()) {
                                 cubit.login(
-                                    email: emailController.text,
-                                    password: passwordController.text);
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
                               }
                             },
                           ),

@@ -13,10 +13,9 @@ class ProfileApi {
   }
 
 //~ update profile states after logout (loged & online states)
-  Future logOutUpdateprofile(
-    String id,
-  ) async {
-    fireStore
+  Future logOutUpdateprofile() async {
+    final id = auth.currentUser!.uid;
+    await fireStore
         .collection(AppStrings.usersCollection)
         .doc(id)
         .collection(AppStrings.profileCollection)
