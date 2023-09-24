@@ -1,27 +1,26 @@
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfileApi {
   final auth = FirebaseAuth.instance;
   final fireStore = FirebaseFirestore.instance;
 //~ logout
-  Future<Unit> logOut() async {
+  Future logOut() async {
     await auth.signOut();
-    return unit;
+    await GoogleSignIn().signOut();
   }
 
-//~ update profile states afrer logout
-  Future<Unit> logOutUpdateprofile(
+//~ update profile states after logout (loged & online states)
+  Future logOutUpdateprofile(
     String id,
   ) async {
-    FirebaseFirestore.instance
+    fireStore
         .collection(AppStrings.usersCollection)
         .doc(id)
         .collection(AppStrings.profileCollection)
         .doc(AppStrings.profileDetailsDoc)
         .update({'isLoged': false, 'isOnline': false});
-    return unit;
   }
 }

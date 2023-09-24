@@ -28,7 +28,7 @@ class SharedPref {
 
   ///Below method is to get the string value from the SharedPreferences.
   String? getString({required String key}) {
-    return sharedPreferences.getString(key) ?? 'null';
+    return sharedPreferences.getString(key);
   }
 
   ///Below method is to set the boolean value in the SharedPreferences.
@@ -48,7 +48,7 @@ class SharedPref {
 
   ///Below method is to set the double value from the SharedPreferences.
   double? getDouble({required String key}) {
-    return sharedPreferences.getDouble(key) ?? 0.0;
+    return sharedPreferences.getDouble(key);
   }
 
   ///Below method is to set the int value in the SharedPreferences.
@@ -58,7 +58,7 @@ class SharedPref {
 
   ///Below method is to get the int value from the SharedPreferences.
   int? getInt({required String key}) {
-    return sharedPreferences.getInt(key) ?? 0;
+    return sharedPreferences.getInt(key);
   }
 
   ///Below method is to remove the received preference.

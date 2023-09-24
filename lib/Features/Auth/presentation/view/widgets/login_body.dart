@@ -15,9 +15,7 @@ import 'package:call/Features/Auth/presentation/view/widgets/login_text_form_fie
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 
 class LoginBody extends StatefulWidget {
-  const LoginBody({
-    super.key,
-  });
+  const LoginBody({super.key});
 
   @override
   State<LoginBody> createState() => _LoginBodyState();
@@ -51,7 +49,7 @@ class _LoginBodyState extends State<LoginBody> {
             state is LoginWithGoogleSuccessState) {
           CustomSnackBar().showSuccessSnackBar(
               context: context, message: 'logged Successfully');
-          MyApp.navigation.navigateAndFinish(AppRouter.controlView);
+          MyApp.navigation.navigateAndFinish(AppRouter.homeView);
         } else if (state is LoginWithEmailPasswordFailureState) {
           CustomSnackBar()
               .showErrorSnackBar(context: context, message: state.errMessage);
@@ -159,13 +157,21 @@ class _LoginBodyState extends State<LoginBody> {
                         ],
                       ),
 //~ facebook login
-                      LoginGoogleFacebook(
-                        title: 'Google',
-                        logo: 'google',
-                        onPressed: () {
-                          cubit.loginWithGoogle();
-                        },
-                      ),
+                      (state is LoginWithGoogleLoadingState)
+                          ? Center(
+                              child: SizedBox(
+                                height: 30.h,
+                                width: 30.w,
+                                child: const CircularProgressIndicator(
+                                  color: AppColors.mainColor,
+                                ),
+                              ),
+                            )
+                          : LoginGoogleFacebook(
+                              title: 'Google',
+                              logo: 'google',
+                              onPressed: () => cubit.loginWithGoogle(),
+                            ),
 //~ google login
                       LoginGoogleFacebook(
                         title: 'Facebook',

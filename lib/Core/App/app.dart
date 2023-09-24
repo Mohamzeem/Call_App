@@ -26,7 +26,7 @@ class App extends StatelessWidget {
             navigatorKey: sl.get<AppNavigation>().navigatorKey,
             onGenerateRoute: AppRouter.onGenerateRoute,
             initialRoute: AppStrings.userId != null
-                ? AppRouter.loginView
+                ? AppRouter.homeView
                 : AppRouter.loginView,
           ),
         );

@@ -13,6 +13,5 @@ void main() async {
   AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
   await setupDependencies();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   runApp(const App());
 }

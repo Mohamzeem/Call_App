@@ -21,14 +21,10 @@ class BuildDeveloper extends StatelessWidget {
             fontType: FontType.medium22,
             color: AppColors.mainColor,
           ),
-          Row(
-            children: [
-              CustomText(
-                text: 'Call Me App',
-                fontType: FontType.medium22,
-                color: AppColors.kBlack,
-              ),
-            ],
+          CustomText(
+            text: 'Call Me App',
+            fontType: FontType.medium22,
+            color: AppColors.kBlack,
           ),
         ],
       ),

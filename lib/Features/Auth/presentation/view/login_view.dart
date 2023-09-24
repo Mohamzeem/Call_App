@@ -17,8 +17,10 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(repo: sl.get<AuthRepoImpl>()),
-      child: const Scaffold(
-        body: LoginBody(),
+      child: const SafeArea(
+        child: Scaffold(
+          body: LoginBody(),
+        ),
       ),
     );
   }

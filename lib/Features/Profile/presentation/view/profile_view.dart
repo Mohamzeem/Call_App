@@ -1,6 +1,5 @@
 import 'package:call/Core/App/app_dependecies.dart';
-import 'package:call/Core/Enums/font_enum.dart';
-import 'package:call/Core/Widgets/custom_text.dart';
+import 'package:call/Core/Widgets/custom_appbar.dart';
 import 'package:call/Features/Profile/data/profile_repo_impl.dart';
 import 'package:call/Features/Profile/presentation/view/widgets/profile_body.dart';
 import 'package:call/Features/Profile/presentation/view_model.dart/cubit/profile_cubit.dart';
@@ -14,16 +13,11 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProfileCubit(repo: sl.get<ProfileRepoImpl>()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const CustomText(
-            text: 'Profile',
-            fontType: FontType.medium32,
-            isTitle: false,
-          ),
-          centerTitle: true,
+      child: const SafeArea(
+        child: Scaffold(
+          appBar: CustomAppBar(isProfile: true, isArrowBack: true),
+          body: ProfileBody(),
         ),
-        body: const ProfileBody(),
       ),
     );
   }

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:call/Core/Services/prints/prints_service.dart';
 import 'package:call/Core/Services/shared_prefs/pref_key.dart';
 import 'package:call/Core/Services/shared_prefs/shared_pref.dart';
 import 'package:call/Core/Utils/app_strings.dart';
@@ -26,8 +29,9 @@ class AuthCubit extends Cubit<AuthState> {
 //~save id in shared pref
       SharedPref().setString(key: PrefKeys.userId, stringValue: user.user!.uid);
       AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
-//!refresh tokenFcm
+//! refresh tokenFcm
       //!  await refreshTokenFcmAndRoomId(user.user!.uid);
+      Prints.success(endPoint: 'Loged in Successfully', message: '$user');
       return emit(LoginWithEmailPasswordSuccessState(user: user));
     });
   }
@@ -42,8 +46,12 @@ class AuthCubit extends Cubit<AuthState> {
         (user) async {
       await repo.addGoogleUserDatatoFirebase(user.user!.uid,
           user.user!.displayName!, user.user!.email!, user.user!.photoURL!);
+      //^ save user model in database..
+      SharedPref()
+          .setString(key: PrefKeys.userId, stringValue: jsonEncode(user));
       SharedPref().setString(key: PrefKeys.userId, stringValue: user.user!.uid);
       AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
+      Prints.success(endPoint: 'Loged in Successfully', message: '$user');
       return emit(LoginWithGoogleSuccessState(user: user));
     });
   }
@@ -57,15 +65,6 @@ class AuthCubit extends Cubit<AuthState> {
             emit(ForgotPasswordFailureState(errMessage: failure.toString())),
         (unit) => emit(ForgotPasswordSuccessState()));
   }
-
-//~logOut
-  // Future<void> logOut() async {
-  //   emit(LogOutLoadingState());
-  //   await FirebaseAuth.instance.signOut();
-  //   SharedPref().removePreference(key: PrefKeys.userId);
-  //   AppStrings.userId = '';
-  //   emit(LogoutSuccessState());
-  // }
 }
 
 /*

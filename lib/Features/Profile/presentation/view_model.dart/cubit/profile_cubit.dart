@@ -23,7 +23,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       AppStrings.userId = '';
       final id = FirebaseAuth.instance.currentUser!.uid;
       repo.logOutUpdateprofile(id);
-      emit(ProfileLogOutSuccessState());
+      return emit(ProfileLogOutSuccessState());
     });
   }
 }

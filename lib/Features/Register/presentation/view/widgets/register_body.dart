@@ -57,7 +57,7 @@ class _LoginButtonsState extends State<LoginButtons> {
         if (state is RegisterSuccessState) {
           CustomSnackBar().showSuccessSnackBar(
               context: context, message: 'تمت الاضافة بنجاح');
-          MyApp.navigation.navigateAndFinish(AppRouter.controlView);
+          MyApp.navigation.navigateAndFinish(AppRouter.homeView);
         } else if (state is RegisterFailureState) {
           CustomSnackBar()
               .showErrorSnackBar(context: context, message: state.errMessage);

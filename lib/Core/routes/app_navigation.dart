@@ -6,12 +6,12 @@ class AppNavigation {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   Future<dynamic>? navigateTo(String routeName, {dynamic args}) {
-    debugPrint("NAVIGATE  type - navigateTo ==> $routeName");
+    debugPrint("NAVIGATION - navigateTo ==> $routeName");
     return navigatorKey.currentState?.pushNamed(routeName, arguments: args);
   }
 
   Future<dynamic>? navigateAndFinish(String routeName, {dynamic args}) {
-    debugPrint("NAVIGATE  type - navigateAndFinish ==> $routeName");
+    debugPrint("NAVIGATION - navigateAndFinish ==> $routeName");
     return navigatorKey.currentState!.pushNamedAndRemoveUntil(
       routeName,
       arguments: args,
@@ -22,7 +22,7 @@ class AppNavigation {
   Future<dynamic>? rootNavigatorTo(
       BuildContext context, String routeName, bool rootNavigator,
       {dynamic args}) {
-    debugPrint("NAVIGATE  type - rootNavigatorTo ==> $routeName");
+    debugPrint("NAVIGATION - rootNavigatorTo ==> $routeName");
     return Navigator.of(context, rootNavigator: rootNavigator)
         .pushNamed(routeName, arguments: args);
   }
