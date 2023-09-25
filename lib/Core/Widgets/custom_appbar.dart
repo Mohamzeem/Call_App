@@ -1,12 +1,13 @@
+import 'package:call/Core/Widgets/custom_cached_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:call/Core/App/app_info.dart';
+import 'package:call/Core/Enums/font_enum.dart';
+import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:call/Core/routes/app_routes.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:call/Core/Enums/font_enum.dart';
-import 'package:call/Core/Utils/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isArrowBack;
@@ -51,17 +52,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: InkWell(
                   onTap: () =>
                       MyApp.navigation.navigateTo(AppRouter.profileView),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(photoUrl),
-                        fit: BoxFit.cover,
-                      ),
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.mainColor),
-                    ),
-                    height: 50.h,
-                    width: 50.w,
+                  child: CustomCachedImage(
+                    photoUrl: photoUrl,
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: Container(

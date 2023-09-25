@@ -5,8 +5,9 @@ import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_button.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomDialog {
+class CustomShowDialog {
   static Future oneButtonDialog({
     required BuildContext context,
     required String textBody,
@@ -18,10 +19,10 @@ class CustomDialog {
       barrierDismissible: false,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.kWhite,
-        title: const SizedBox(
-          width: 200,
-          height: 200,
-          child: Icon(Icons.abc_outlined),
+        title: SizedBox(
+          width: 200.w,
+          height: 200.h,
+          child: const Icon(Icons.abc_outlined),
         ),
         content: CustomText(
           text: textBody,
@@ -32,8 +33,8 @@ class CustomDialog {
             onPressed: onPressed,
             text: textButton,
             fontType: FontType.medium16,
-            width: 320,
-            height: 45,
+            width: 320.w,
+            height: 45.h,
             lastRadius: 10,
             threeRadius: 10,
           )
@@ -78,8 +79,8 @@ class CustomDialog {
                 onPressed: onPressed,
                 text: textButton1,
                 fontType: FontType.medium18,
-                width: 90,
-                height: 35,
+                width: 90.w,
+                height: 35.h,
                 isLoading: isLoading,
                 lastRadius: 10,
                 threeRadius: 10,
@@ -90,8 +91,8 @@ class CustomDialog {
                 },
                 text: textButton2,
                 fontType: FontType.medium18,
-                width: 90,
-                height: 35,
+                width: 90.w,
+                height: 35.h,
                 lastRadius: 10,
                 threeRadius: 10,
               )

@@ -11,8 +11,8 @@ class AppStrings {
 
   //~ Firebase Collections
   static const String usersCollection = 'Users';
-  static const String profileCollection = 'Profile';
-  static const String profileDetailsDoc = 'profileDetails';
+  static const String profileDocument = 'Profile';
+  static const String profileDetailsCollection = 'profileDetails';
   static const String coachingSessionsCollection = 'Coaching Sessions';
   static const String fastCoachingSessionsCollection = 'Fast Coaching Sessions';
   static const String employeesCollection = 'Employees';

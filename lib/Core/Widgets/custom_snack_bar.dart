@@ -3,8 +3,8 @@ import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomSnackBar {
-  void showSuccessSnackBar(
-      {required BuildContext context, required String message}) {
+  static Future showSuccessSnackBar(
+      {required BuildContext context, required String message}) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         elevation: 8,
@@ -28,8 +28,8 @@ class CustomSnackBar {
     );
   }
 
-  void showErrorSnackBar(
-      {required BuildContext context, required String message}) {
+  static Future showErrorSnackBar(
+      {required BuildContext context, required String message}) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         elevation: 8,

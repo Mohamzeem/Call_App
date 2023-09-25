@@ -55,12 +55,12 @@ class _LoginButtonsState extends State<LoginButtons> {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
-          CustomSnackBar().showSuccessSnackBar(
+          CustomSnackBar.showSuccessSnackBar(
               context: context, message: 'Registerd Successfully');
           MyApp.navigation.navigateAndFinish(AppRouter.loginView);
         } else if (state is RegisterFailureState) {
-          CustomSnackBar()
-              .showErrorSnackBar(context: context, message: state.errMessage);
+          CustomSnackBar.showErrorSnackBar(
+              context: context, message: state.errMessage);
         }
       },
       builder: (context, state) {

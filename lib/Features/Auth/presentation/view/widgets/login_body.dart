@@ -1,5 +1,4 @@
 import 'package:call/Core/App/app_info.dart';
-import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/routes/app_routes.dart';
 import 'package:call/Features/Auth/presentation/view/widgets/login_facebook_google.dart';
 import 'package:flutter/material.dart';
@@ -48,15 +47,15 @@ class _LoginBodyState extends State<LoginBody> {
       listener: (context, state) {
         if (state is LoginWithEmailPasswordSuccessState ||
             state is LoginWithGoogleSuccessState) {
-          CustomSnackBar().showSuccessSnackBar(
+          CustomSnackBar.showSuccessSnackBar(
               context: context, message: 'loged in Successfully');
           MyApp.navigation.navigateAndFinish(AppRouter.homeView);
         } else if (state is LoginWithEmailPasswordFailureState) {
-          CustomSnackBar()
-              .showErrorSnackBar(context: context, message: state.errMessage);
+          CustomSnackBar.showErrorSnackBar(
+              context: context, message: state.errMessage);
         } else if (state is LoginWithGoogleFailureState) {
-          CustomSnackBar()
-              .showErrorSnackBar(context: context, message: state.errMessage);
+          CustomSnackBar.showErrorSnackBar(
+              context: context, message: state.errMessage);
         }
       },
       builder: (context, state) {

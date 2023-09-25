@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:call/Core/Services/prints/prints_service.dart';
 import 'package:call/Core/Services/shared_prefs/pref_key.dart';
 import 'package:call/Core/Services/shared_prefs/shared_pref.dart';
@@ -6,7 +5,6 @@ import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Features/Auth/data/repo/auth_repo_impl.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_state.dart';

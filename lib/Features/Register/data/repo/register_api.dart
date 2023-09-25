@@ -19,7 +19,7 @@ class RegisterApi {
   }
 
 //~ add user data in firebase
-  Future<Unit> addUserDatatoFirebase(
+  Future<void> addUserDatatoFirebase(
     String id,
     String name,
     String email,
@@ -31,11 +31,11 @@ class RegisterApi {
       email: email,
     );
     await firestore
-        .collection('Users')
+        .collection(AppStrings.usersCollection)
+        .doc(AppStrings.profileDocument)
+        .collection(AppStrings.profileDetailsCollection)
         .doc(id)
-        .collection('Profile')
-        .doc('profileDetails')
-        .set(userModel.toJson(id: id, tokenFcm: token!));
-    return unit;
+        .set(userModel.toJson(
+            id: id, tokenFcm: token!, isOnline: false, isloged: false));
   }
 }

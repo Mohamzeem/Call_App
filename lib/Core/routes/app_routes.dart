@@ -1,6 +1,7 @@
 import 'package:call/Core/routes/base_routes.dart';
 import 'package:call/Features/Auth/presentation/view/login_view.dart';
-import 'package:call/Features/Contatcs/presentation/view/contacts_view.dart';
+import 'package:call/Features/Contacts/presentation/view/contact_details_view.dart';
+import 'package:call/Features/Contacts/presentation/view/contacts_view.dart';
 import 'package:call/Features/Home/presentation/view/home_view.dart';
 import 'package:call/Features/Profile/presentation/view/profile_view.dart';
 import 'package:call/Features/Register/presentation/view/register_view.dart';
@@ -14,6 +15,7 @@ abstract class AppRouter {
   static const String homeView = "homeView";
   static const String profileView = "profileView";
   static const String contactsView = "contactsView";
+  static const String contactDetailsView = "contactDetailsView";
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     var args = settings.arguments;
@@ -30,6 +32,8 @@ abstract class AppRouter {
         return BaseRoute(const ProfileView());
       case contactsView:
         return BaseRoute(const ContactsView());
+      case contactDetailsView:
+        return BaseRoute(const ContactDetailsView());
 
       default:
         return BaseRoute(const SplashView());

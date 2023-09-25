@@ -7,19 +7,19 @@ class ProfileApi {
   final auth = FirebaseAuth.instance;
   final fireStore = FirebaseFirestore.instance;
 //~ logout
-  Future logOut() async {
+  Future<void> logOut() async {
     await auth.signOut();
     await GoogleSignIn().signOut();
   }
 
 //~ update profile states after logout (loged & online states)
-  Future logOutUpdateprofile() async {
+  Future<void> logOutUpdateprofile() async {
     final id = auth.currentUser!.uid;
     await fireStore
         .collection(AppStrings.usersCollection)
+        .doc(AppStrings.profileDocument)
+        .collection(AppStrings.profileDetailsCollection)
         .doc(id)
-        .collection(AppStrings.profileCollection)
-        .doc(AppStrings.profileDetailsDoc)
         .update({'isLoged': false, 'isOnline': false});
   }
 }

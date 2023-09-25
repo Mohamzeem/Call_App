@@ -29,17 +29,17 @@ class Logout extends StatelessWidget {
           BlocConsumer<ProfileCubit, ProfileState>(
             listener: (context, state) {
               if (state is ProfileLogOutFailureState) {
-                CustomSnackBar().showErrorSnackBar(
+                CustomSnackBar.showErrorSnackBar(
                     context: context, message: 'Log Out Failed');
               } else if (state is ProfileLogOutSuccessState) {
                 MyApp.navigation.navigateAndFinish(AppRouter.loginView);
-                CustomSnackBar().showSuccessSnackBar(
+                CustomSnackBar.showSuccessSnackBar(
                     context: context, message: 'Loged Out Successfully');
               }
             },
             builder: (context, state) {
               return InkWell(
-                onTap: () => CustomDialog.twoButtonDialog(
+                onTap: () => CustomShowDialog.twoButtonDialog(
                     context: context,
                     textBody: 'Are you sure you want to log out',
                     textButton1: 'Yes',

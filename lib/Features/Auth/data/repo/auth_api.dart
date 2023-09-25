@@ -34,18 +34,18 @@ class AuthApi {
   }
 
 //~ update user status in firebase
-  Future updateUserStatus() async {
+  Future<void> updateUserStatus() async {
     final id = auth.currentUser!.uid;
     await firestore
         .collection(AppStrings.usersCollection)
+        .doc(AppStrings.profileDocument)
+        .collection(AppStrings.profileDetailsCollection)
         .doc(id)
-        .collection(AppStrings.profileCollection)
-        .doc(AppStrings.profileDetailsDoc)
         .update({'isLoged': true, 'isOnline': true});
   }
 
 //~ add google user data to Firebase
-  Future<Unit> addGoogleUserDatatoFirebase(
+  Future<void> addGoogleUserDatatoFirebase(
     String id,
     String name,
     String email,
@@ -56,17 +56,16 @@ class AuthApi {
         UserModel(id: id, name: name, email: email, photo: photoUrl);
     await firestore
         .collection(AppStrings.usersCollection)
+        .doc(AppStrings.profileDocument)
+        .collection(AppStrings.profileDetailsCollection)
         .doc(id)
-        .collection(AppStrings.profileCollection)
-        .doc(AppStrings.profileDetailsDoc)
-        .set(userModel.toJson(id: id, tokenFcm: token!));
-    return unit;
+        .set(userModel.toJson(
+            id: id, tokenFcm: token!, isOnline: true, isloged: true));
   }
 
 //~ forgot password
-  Future<Unit> forgotPassword({required String email}) async {
+  Future<void> forgotPassword({required String email}) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: "$email.trim()");
-    return unit;
   }
 
 //~ Get User Profile To get Role And Refresh TokeFmc

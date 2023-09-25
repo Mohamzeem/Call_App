@@ -34,7 +34,8 @@ class UserModel extends Equatable {
     );
   }
 
-  Map<String, dynamic> toJson({String? id, String? tokenFcm}) {
+  Map<String, dynamic> toJson(
+      {String? id, String? tokenFcm, bool? isloged, bool? isOnline}) {
     return <String, dynamic>{
       'id': id,
       'photo': photo ?? "",
@@ -42,8 +43,8 @@ class UserModel extends Equatable {
       'email': email ?? "",
       'mobileNum': mobileNum ?? "",
       'tokenFcm': tokenFcm,
-      'isLoged': true,
-      'isOnline': true,
+      'isLoged': isLoged,
+      'isOnline': isOnline,
     };
   }
 

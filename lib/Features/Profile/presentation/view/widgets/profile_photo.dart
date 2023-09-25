@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,21 +17,35 @@ class ProfilePhoto extends StatelessWidget {
       child: Center(
         child: InkWell(
           onTap: () {},
-          child: Container(
-            decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: NetworkImage(
-                    'https://firebasestorage.googleapis.com/v0/b/call-me-98459.appspot.com/o/icons8-account-40.png?alt=media&token=07e51d3d-b60c-4f84-ad0a-f35a747545f3'),
-                fit: BoxFit.cover,
+          child: CachedNetworkImage(
+            imageUrl: AppStrings.defaultAppPhoto,
+            fit: BoxFit.fill,
+            imageBuilder: (context, imageProvider) => Container(
+              width: 100.h,
+              height: 100.w,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.mainColor,
+                  width: 0.5,
+                ),
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.fill,
+                ),
               ),
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.mainColor),
+              child: const Align(
+                alignment: Alignment.topRight,
+                child: Icon(
+                  Icons.camera_alt_outlined,
+                  color: AppColors.mainColor,
+                ),
+              ),
             ),
-            height: 100.h,
-            width: 100.w,
-            child: const Align(
-              alignment: Alignment.topRight,
-              child: Icon(Icons.camera_alt_outlined),
+            errorWidget: (context, url, error) => const Icon(
+              Icons.error,
+              size: 40,
+              color: AppColors.kRed,
             ),
           ),
         ),
