@@ -17,6 +17,7 @@ class StreamCubit extends Cubit<StreamState> {
         .orderBy('isOnline', descending: true)
         .snapshots()
         .listen((event) {
+      listOfStream.clear();
       for (var result in event.docs) {
         listOfStream.add(UserModel.fromJson(result.data()));
       }

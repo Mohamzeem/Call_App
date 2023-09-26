@@ -7,7 +7,7 @@ import 'package:call/Core/Widgets/custom_circular_loading.dart';
 import 'package:call/Core/Widgets/custom_skelton_shimmer.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:call/Core/routes/app_routes.dart';
-import 'package:call/Features/Contacts/presentation/view_model/contacts_cubit/contacts_cubit.dart';
+import 'package:call/Features/Contacts/presentation/view_model/stream_cubit/stream_cubit.dart';
 import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,30 +24,30 @@ class _ContactsBodyState extends State<ContactsBody> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ContactsCubit>(context).getAllContacts();
+    BlocProvider.of<StreamCubit>(context).getStream();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ContactsCubit, ContactsState>(
+    return BlocBuilder<StreamCubit, StreamState>(
       builder: (context, state) {
 //~ contacts list loaded successfully
-        if (state is ContactsSuccessState) {
+        if (state is StreamSuccessState) {
           return Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) {
-                final item = state.contactsList[index];
+                final item = state.streamList[index];
                 return ContactsListItem(item: item);
               },
               separatorBuilder: (context, index) => const Divider(
                 thickness: 0.6,
                 color: AppColors.mainColor,
               ),
-              itemCount: state.contactsList.length,
+              itemCount: state.streamList.length,
             ),
           );
 //~ contacts list empty
-        } else if (state is ContactsEmptyState) {
+        } else if (state is StreamEmptyState) {
           return const Center(
             child: CustomText(
               text: 'No Contacts Found !!!',
@@ -55,7 +55,7 @@ class _ContactsBodyState extends State<ContactsBody> {
             ),
           );
 //~ contacts list loading
-        } else if (state is ContactsLoadingState) {
+        } else if (state is StreamLoadingState) {
           return Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) {
@@ -66,7 +66,7 @@ class _ContactsBodyState extends State<ContactsBody> {
                 color: AppColors.mainColor,
               ),
               itemCount:
-                  BlocProvider.of<ContactsCubit>(context).listOfContacts.length,
+                  BlocProvider.of<StreamCubit>(context).listOfStream.length,
             ),
           );
         }

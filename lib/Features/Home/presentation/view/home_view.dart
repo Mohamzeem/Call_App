@@ -1,6 +1,6 @@
 import 'package:call/Core/Widgets/custom_appbar.dart';
-import 'package:call/Features/Home/presentation/view/widgets/contacts_icon.dart';
-import 'package:call/Features/Home/presentation/view/widgets/home_body.dart';
+import 'package:call/Features/Home/presentation/view/widgets/floating_icon.dart';
+import 'package:call/Features/Home/presentation/view/widgets/body.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {

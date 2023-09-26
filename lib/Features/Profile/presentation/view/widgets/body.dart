@@ -2,7 +2,7 @@ import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Features/Profile/presentation/view/widgets/build_developer.dart';
 import 'package:call/Features/Profile/presentation/view/widgets/build_version.dart';
 import 'package:call/Features/Profile/presentation/view/widgets/logout.dart';
-import 'package:call/Features/Profile/presentation/view/widgets/profile_photo.dart';
+import 'package:call/Features/Profile/presentation/view/widgets/photo.dart';
 import 'package:flutter/material.dart';
 
 class ProfileBody extends StatelessWidget {

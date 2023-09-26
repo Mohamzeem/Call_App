@@ -1,6 +1,6 @@
 import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/routes/app_routes.dart';
-import 'package:call/Features/Auth/presentation/view/widgets/login_facebook_google.dart';
+import 'package:call/Features/Auth/presentation/view/widgets/facebook_google_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +11,7 @@ import 'package:call/Core/Widgets/custom_button.dart';
 import 'package:call/Core/Widgets/custom_snack_bar.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:call/Core/Widgets/custom_text_button.dart';
-import 'package:call/Features/Auth/presentation/view/widgets/login_text_form_field.dart';
+import 'package:call/Features/Auth/presentation/view/widgets/text_form_field.dart';
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 
 class LoginBody extends StatefulWidget {
