@@ -6,9 +6,7 @@ import 'package:call/Features/Profile/presentation/view/widgets/photo.dart';
 import 'package:flutter/material.dart';
 
 class ProfileBody extends StatelessWidget {
-  const ProfileBody({
-    super.key,
-  });
+  const ProfileBody({super.key});
 
   @override
   Widget build(BuildContext context) {

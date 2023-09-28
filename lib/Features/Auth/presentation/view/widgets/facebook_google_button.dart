@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class LoginGoogleFacebook extends StatelessWidget {
   final String logo;
   final String title;
+  final bool? isLoading;
   final void Function() onPressed;
   const LoginGoogleFacebook({
     Key? key,
     required this.logo,
     required this.title,
     required this.onPressed,
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
@@ -24,8 +26,10 @@ class LoginGoogleFacebook extends StatelessWidget {
         ),
 //~title
         CustomTextButton(
-          text: 'Login with $title',
+          text: isLoading! ? 'loading ...' : 'Login with $title',
           onPressed: onPressed,
+          underline:
+              isLoading! ? TextDecoration.none : TextDecoration.underline,
         ),
       ],
     );

@@ -1,26 +1,26 @@
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_appbar.dart';
 import 'package:call/Features/Contacts/presentation/view/widgets/stream.dart';
+import 'package:call/Features/Profile/presentation/view_model.dart/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ContactsView extends StatefulWidget {
+class ContactsView extends StatelessWidget {
   const ContactsView({super.key});
 
-  @override
-  State<ContactsView> createState() => _ContactsViewState();
-}
-
-class _ContactsViewState extends State<ContactsView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       //  child: BlocProvider(
       //! cubit changed + add repImpl
-      //  create: (context) => StreamCubit(),
-      //create: (context) => ContactsCubit(repo: sl.get<ContactsRepoImpl>()),
+      // create: (context) => StreamCubit(),
+      // create: (context) => ContactsCubit(repo: sl.get<ContactsRepoImpl>()),
       child: Scaffold(
-        appBar: const CustomAppBar(isArrowBack: true),
+        appBar: CustomAppBar(
+          isArrowBack: true,
+          photoUrl: BlocProvider.of<ProfileCubit>(context).userModel!.isPhoto,
+        ),
         body: Padding(
           padding: EdgeInsets.symmetric(
             vertical: AppPadding().h20,
@@ -29,7 +29,7 @@ class _ContactsViewState extends State<ContactsView> {
           child: Column(
             children: [
               //! body changed
-              //const ContactsBody(),
+              // const ContactsBody(),
               const StreamBody(),
               SizedBox(height: 20.h),
             ],

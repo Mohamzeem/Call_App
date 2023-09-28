@@ -2,6 +2,7 @@
 import 'package:call/Core/Services/shared_prefs/pref_key.dart';
 import 'package:call/Core/Services/shared_prefs/shared_pref.dart';
 import 'package:call/Core/Utils/app_strings.dart';
+import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:call/Features/Profile/data/profile_repo_impl.dart';
@@ -11,9 +12,9 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepoImpl repo;
   ProfileCubit({required this.repo}) : super(ProfileInitialState());
-
+  UserModel? userModel;
   void logOut() async {
-    emit(ProfileLogOutLoadingState());
+    emit(const ProfileLogOutLoadingState());
     final result = await repo.logOut();
     result
         .fold((failure) => emit(ProfileLogOutFailureState(errMessage: failure)),
@@ -21,7 +22,20 @@ class ProfileCubit extends Cubit<ProfileState> {
       SharedPref().removePreference(key: PrefKeys.userId);
       AppStrings.userId = '';
       await repo.logOutUpdateprofile();
-      return emit(ProfileLogOutSuccessState());
+      return emit(const ProfileLogOutSuccessState());
     });
+  }
+
+  void getProfile() async {
+    emit(const ProfileGetLoadingState());
+    final result = await repo.getProfile();
+
+    result.fold(
+      (failure) => emit(ProfileGetFailureState(errMessage: failure)),
+      (profile) {
+        userModel = profile;
+        emit(ProfileGetSuccessState(userModel: profile));
+      },
+    );
   }
 }

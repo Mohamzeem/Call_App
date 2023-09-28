@@ -40,13 +40,14 @@ class Logout extends StatelessWidget {
             builder: (context, state) {
               return InkWell(
                 onTap: () => CustomShowDialog.twoButtonDialog(
-                    context: context,
-                    textBody: 'Are you sure you want to log out',
-                    textButton1: 'Yes',
-                    textButton2: 'No',
-                    onPressed: () =>
-                        BlocProvider.of<ProfileCubit>(context).logOut(),
-                    isLoading: state is ProfileLogOutLoadingState),
+                  context: context,
+                  textBody: 'Are you sure you want to log out',
+                  textButton1: 'LOG OUT',
+                  textButton2: 'CANCEL',
+                  onPressed: () =>
+                      BlocProvider.of<ProfileCubit>(context).logOut(),
+                  isLoading: state is ProfileLogOutLoadingState,
+                ),
                 child: const Icon(Icons.arrow_back_ios_new),
               );
             },

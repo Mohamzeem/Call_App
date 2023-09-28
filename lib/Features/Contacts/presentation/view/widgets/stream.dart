@@ -1,8 +1,10 @@
+import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_circular_loading.dart';
 import 'package:call/Core/Widgets/custom_error_loading.dart';
 import 'package:call/Core/Widgets/custom_skelton_shimmer.dart';
+import 'package:call/Core/routes/app_routes.dart';
 import 'package:call/Features/Contacts/presentation/view/widgets/list_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +68,8 @@ class _StreamBodyState extends State<StreamBody> {
                   return SizedBox(height: 0.h);
                 }
                 return ListItem(
+                  onTap: () => MyApp.navigation
+                      .navigateTo(AppRouter.contactDetailsView, args: item),
                   photoUrl: item['photo'],
                   isOnline: item['isOnline'],
                   name: item['name'],

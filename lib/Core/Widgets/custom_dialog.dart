@@ -1,9 +1,8 @@
 import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_colors.dart';
-import 'package:call/Core/Utils/app_padding.dart';
-import 'package:call/Core/Widgets/custom_button.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
+import 'package:call/Core/Widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,15 +28,11 @@ class CustomShowDialog {
           fontType: FontType.medium14,
         ),
         actions: [
-          CustomButton(
-            onPressed: onPressed,
+          CustomTextButton(
             text: textButton,
-            fontType: FontType.medium16,
-            width: 320.w,
-            height: 45.h,
-            lastRadius: 10,
-            threeRadius: 10,
-          )
+            onPressed: onPressed,
+            underline: TextDecoration.none,
+          ),
         ],
       ),
     );
@@ -52,50 +47,32 @@ class CustomShowDialog {
     required bool isLoading,
   }) async {
     showDialog(
-      // barrierDismissible: false,
+      barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.kWhite,
-        title: Padding(
-          padding: EdgeInsets.only(
-            top: AppPadding().h30,
-            bottom: AppPadding().h20,
-          ),
-          child: Center(
-            child: CustomText(
-              text: textBody,
-              fontType: FontType.medium22,
-              softWrap: true,
-              textAlign: TextAlign.center,
-            ),
+        title: Center(
+          child: CustomText(
+            text: textBody,
+            fontType: FontType.medium22,
+            softWrap: true,
+            textAlign: TextAlign.center,
           ),
         ),
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CustomButton(
-                backgroundColor: AppColors.kRed,
+              CustomTextButton(
+                text: isLoading ? 'loading...' : textButton1,
                 onPressed: onPressed,
-                text: textButton1,
-                fontType: FontType.medium18,
-                width: 90.w,
-                height: 35.h,
-                isLoading: isLoading,
-                lastRadius: 10,
-                threeRadius: 10,
+                underline: TextDecoration.none,
               ),
-              CustomButton(
-                onPressed: () {
-                  MyApp.navigation.goBack();
-                },
-                text: textButton2,
-                fontType: FontType.medium18,
-                width: 90.w,
-                height: 35.h,
-                lastRadius: 10,
-                threeRadius: 10,
-              )
+              CustomTextButton(
+                text: isLoading ? 'loading...' : textButton2,
+                onPressed: () => MyApp.navigation.goBack(),
+                underline: TextDecoration.none,
+              ),
             ],
           )
         ],

@@ -33,7 +33,7 @@ abstract class AppRouter {
       case contactsView:
         return BaseRoute(const ContactsView());
       case contactDetailsView:
-        return BaseRoute(const ContactDetailsView());
+        return BaseRoute(ContactDetailsView(item: args));
 
       default:
         return BaseRoute(const SplashView());

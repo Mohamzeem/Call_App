@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class UserModel extends Equatable {
@@ -46,6 +47,37 @@ class UserModel extends Equatable {
       'isLoged': isLoged,
       'isOnline': isOnline,
     };
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return <String, dynamic>{
+      'id': id,
+      'photo': photo ?? "",
+      'name': name ?? "",
+      'email': email ?? "",
+      'mobileNum': mobileNum ?? "",
+      'tokenFcm': tokenFcm,
+      'isLoged': isLoged,
+      'isOnline': isOnline,
+    };
+  }
+
+  factory UserModel.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  ) {
+    final json = snapshot.data();
+
+    return UserModel(
+      id: json?['id'] ?? "",
+      photo: json?['photo'] ?? "",
+      name: json?['name'] ?? "",
+      email: json?['email'] ?? "",
+      mobileNum: json?['mobileNum'] ?? "",
+      tokenFcm: json?['tokenFcm'] ?? "",
+      isLoged: json?['isLoged'] ?? false,
+      isOnline: json?['isOnline'] ?? false,
+    );
   }
 
   Map<String, dynamic> toUpdateJson({

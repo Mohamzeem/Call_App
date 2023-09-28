@@ -53,6 +53,25 @@ class LoginWithGoogleFailureState extends AuthState {
   List<Object> get props => [errMessage];
 }
 
+//~login with google
+class LoginWithFaceBookLoadingState extends AuthState {
+  const LoginWithFaceBookLoadingState();
+}
+
+class LoginWithFaceBookSuccessState extends AuthState {
+  final UserCredential user;
+  const LoginWithFaceBookSuccessState({required this.user});
+  @override
+  List<Object> get props => [user];
+}
+
+class LoginWithFaceBookFailureState extends AuthState {
+  final String errMessage;
+  const LoginWithFaceBookFailureState({required this.errMessage});
+  @override
+  List<Object> get props => [errMessage];
+}
+
 //~logOut states
 class LogoutSuccessState extends AuthState {
   @override

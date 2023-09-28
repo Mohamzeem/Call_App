@@ -11,18 +11,35 @@ final class ProfileInitialState extends ProfileState {}
 
 //~ logout from firebase
 final class ProfileLogOutLoadingState extends ProfileState {
-  @override
-  List<Object> get props => [];
+  const ProfileLogOutLoadingState();
 }
 
 final class ProfileLogOutSuccessState extends ProfileState {
-  @override
-  List<Object> get props => [];
+  const ProfileLogOutSuccessState();
 }
 
 final class ProfileLogOutFailureState extends ProfileState {
   final String errMessage;
   const ProfileLogOutFailureState({required this.errMessage});
+  @override
+  List<Object> get props => [errMessage];
+}
+
+//~ get user profile from firebase
+final class ProfileGetLoadingState extends ProfileState {
+  const ProfileGetLoadingState();
+}
+
+final class ProfileGetSuccessState extends ProfileState {
+  final UserModel userModel;
+  const ProfileGetSuccessState({required this.userModel});
+  @override
+  List<Object> get props => [userModel];
+}
+
+final class ProfileGetFailureState extends ProfileState {
+  final String errMessage;
+  const ProfileGetFailureState({required this.errMessage});
   @override
   List<Object> get props => [errMessage];
 }

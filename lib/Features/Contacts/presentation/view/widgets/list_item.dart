@@ -1,28 +1,29 @@
-import 'package:call/Core/App/app_info.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_cached_image.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
-import 'package:call/Core/routes/app_routes.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListItem extends StatelessWidget {
   final String photoUrl;
   final String name;
   final bool isOnline;
+  final VoidCallback onTap;
   const ListItem({
-    super.key,
+    Key? key,
     required this.photoUrl,
-    required this.isOnline,
     required this.name,
-  });
+    required this.isOnline,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => MyApp.navigation.navigateTo(AppRouter.contactDetailsView),
+      onTap: onTap,
       child: Column(
         children: [
           Row(

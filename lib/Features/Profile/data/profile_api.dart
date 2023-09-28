@@ -1,4 +1,5 @@
 import 'package:call/Core/Utils/app_strings.dart';
+import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,5 +22,15 @@ class ProfileApi {
         .collection(AppStrings.profileDetailsCollection)
         .doc(id)
         .update({'isLoged': false, 'isOnline': false});
+  }
+
+  Future<UserModel> getProfile() async {
+    final result = await fireStore
+        .collection(AppStrings.usersCollection)
+        .doc(AppStrings.profileDocument)
+        .collection(AppStrings.profileDetailsCollection)
+        .doc(AppStrings.userId)
+        .get();
+    return UserModel.fromJson(result.data()!);
   }
 }

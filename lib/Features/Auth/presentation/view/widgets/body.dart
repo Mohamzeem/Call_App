@@ -46,11 +46,15 @@ class _LoginBodyState extends State<LoginBody> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginWithEmailPasswordSuccessState ||
+            state is LoginWithFaceBookSuccessState ||
             state is LoginWithGoogleSuccessState) {
           CustomSnackBar.showSuccessSnackBar(
               context: context, message: 'loged in Successfully');
           MyApp.navigation.navigateAndFinish(AppRouter.homeView);
         } else if (state is LoginWithEmailPasswordFailureState) {
+          CustomSnackBar.showErrorSnackBar(
+              context: context, message: state.errMessage);
+        } else if (state is LoginWithFaceBookFailureState) {
           CustomSnackBar.showErrorSnackBar(
               context: context, message: state.errMessage);
         } else if (state is LoginWithGoogleFailureState) {
@@ -125,7 +129,7 @@ class _LoginBodyState extends State<LoginBody> {
                         suffixIconFunction: () => showPassword(),
                       ),
                       SizedBox(height: 10.h),
-                      //~login button
+//~login button
                       Center(
                         child: Padding(
                           padding: EdgeInsets.only(
@@ -159,26 +163,18 @@ class _LoginBodyState extends State<LoginBody> {
                         ],
                       ),
 //~ facebook login
-                      (state is LoginWithGoogleLoadingState)
-                          ? Center(
-                              child: SizedBox(
-                                height: 30.h,
-                                width: 30.w,
-                                child: const CircularProgressIndicator(
-                                  color: AppColors.mainColor,
-                                ),
-                              ),
-                            )
-                          : LoginGoogleFacebook(
-                              title: 'Google',
-                              logo: 'google',
-                              onPressed: () => cubit.loginWithGoogle(),
-                            ),
+                      LoginGoogleFacebook(
+                        title: 'Google',
+                        logo: 'google',
+                        onPressed: () => cubit.loginWithGoogle(),
+                        isLoading: state is LoginWithGoogleLoadingState,
+                      ),
 //~ google login
                       LoginGoogleFacebook(
                         title: 'Facebook',
                         logo: 'facebook',
                         onPressed: () {},
+                        isLoading: state is LoginWithFaceBookLoadingState,
                       ),
                       SizedBox(height: 60.h),
 //~ go to sign in page
