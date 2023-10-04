@@ -21,24 +21,24 @@ class ProfilePhoto extends StatelessWidget {
               child: InkWell(
                 onTap: () {},
                 child: CachedNetworkImage(
-                  imageUrl: state.userModel.isPhoto,
+                  imageUrl: state.userModel.photo!.isEmpty
+                      ? AppStrings.defaultAppPhoto
+                      : state.userModel.photo!,
                   fit: BoxFit.fill,
                   imageBuilder: (context, imageProvider) => Container(
                     width: 120.h,
                     height: 120.w,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColors.mainColor,
-                        width: 0.5,
-                      ),
+                      border:
+                          Border.all(color: AppColors.mainColor, width: 0.5),
                       image: DecorationImage(
                         image: imageProvider,
                         fit: BoxFit.fill,
                       ),
                     ),
                     child: const Align(
-                      alignment: Alignment.topRight,
+                      alignment: Alignment.bottomRight,
                       child: Icon(
                         Icons.camera_alt_outlined,
                         color: AppColors.mainColor,
@@ -62,10 +62,7 @@ class ProfilePhoto extends StatelessWidget {
                 ),
                 height: 120.h,
                 width: 120.w,
-                child: const Icon(
-                  Icons.person,
-                  size: 100,
-                ),
+                child: const Icon(Icons.person, size: 100),
               ),
             );
           } else {
@@ -90,7 +87,7 @@ class ProfilePhoto extends StatelessWidget {
                       ),
                     ),
                     child: const Align(
-                      alignment: Alignment.topRight,
+                      alignment: Alignment.bottomRight,
                       child: Icon(
                         Icons.camera_alt_outlined,
                         color: AppColors.mainColor,

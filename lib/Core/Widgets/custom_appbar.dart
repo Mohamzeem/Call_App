@@ -54,6 +54,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       MyApp.navigation.navigateTo(AppRouter.profileView),
                   child: CustomCachedImage(
                     photoUrl: photoUrl,
+                    // photoUrl.isEmpty
+                    //     ? AppStrings.defaultAppPhoto
+                    //     : photoUrl,
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: Container(

@@ -13,19 +13,6 @@ class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepoImpl repo;
   ProfileCubit({required this.repo}) : super(ProfileInitialState());
   UserModel? userModel;
-  void logOut() async {
-    emit(const ProfileLogOutLoadingState());
-    final result = await repo.logOut();
-    result
-        .fold((failure) => emit(ProfileLogOutFailureState(errMessage: failure)),
-            (unit) async {
-      SharedPref().removePreference(key: PrefKeys.userId);
-      AppStrings.userId = '';
-      await repo.logOutUpdateprofile();
-      return emit(const ProfileLogOutSuccessState());
-    });
-  }
-
   void getProfile() async {
     emit(const ProfileGetLoadingState());
     final result = await repo.getProfile();
@@ -37,5 +24,18 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(ProfileGetSuccessState(userModel: profile));
       },
     );
+  }
+
+  void logOut() async {
+    emit(const ProfileLogOutLoadingState());
+    final result = await repo.logOut();
+    result
+        .fold((failure) => emit(ProfileLogOutFailureState(errMessage: failure)),
+            (unit) async {
+      SharedPref().removePreference(key: PrefKeys.userId);
+      AppStrings.userId = '';
+      await repo.logOutUpdateprofile();
+      return emit(const ProfileLogOutSuccessState());
+    });
   }
 }

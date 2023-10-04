@@ -1,6 +1,9 @@
+import 'package:call/Core/App/app_dependecies.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_appbar.dart';
-import 'package:call/Features/Contacts/presentation/view/widgets/stream.dart';
+import 'package:call/Features/Contacts/data/repo/contacts_repo_impl.dart';
+import 'package:call/Features/Contacts/presentation/view/widgets/contacts_body.dart';
+import 'package:call/Features/Contacts/presentation/view_model/contacts_cubit/contacts_cubit.dart';
 import 'package:call/Features/Profile/presentation/view_model.dart/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,14 +15,13 @@ class ContactsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      //  child: BlocProvider(
+        child: BlocProvider(
       //! cubit changed + add repImpl
-      // create: (context) => StreamCubit(),
-      // create: (context) => ContactsCubit(repo: sl.get<ContactsRepoImpl>()),
+      create: (context) => ContactsCubit(repo: sl.get<ContactsRepoImpl>()),
       child: Scaffold(
         appBar: CustomAppBar(
           isArrowBack: true,
-          photoUrl: BlocProvider.of<ProfileCubit>(context).userModel!.isPhoto,
+          photoUrl: BlocProvider.of<ProfileCubit>(context).userModel!.photo!,
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
@@ -29,13 +31,13 @@ class ContactsView extends StatelessWidget {
           child: Column(
             children: [
               //! body changed
-              // const ContactsBody(),
-              const StreamBody(),
+              const ContactsBody(),
+              //const StreamBody(),
               SizedBox(height: 20.h),
             ],
           ),
         ),
       ),
-    );
+    ));
   }
 }

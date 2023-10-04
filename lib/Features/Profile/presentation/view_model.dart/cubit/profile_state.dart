@@ -9,22 +9,6 @@ sealed class ProfileState extends Equatable {
 
 final class ProfileInitialState extends ProfileState {}
 
-//~ logout from firebase
-final class ProfileLogOutLoadingState extends ProfileState {
-  const ProfileLogOutLoadingState();
-}
-
-final class ProfileLogOutSuccessState extends ProfileState {
-  const ProfileLogOutSuccessState();
-}
-
-final class ProfileLogOutFailureState extends ProfileState {
-  final String errMessage;
-  const ProfileLogOutFailureState({required this.errMessage});
-  @override
-  List<Object> get props => [errMessage];
-}
-
 //~ get user profile from firebase
 final class ProfileGetLoadingState extends ProfileState {
   const ProfileGetLoadingState();
@@ -40,6 +24,22 @@ final class ProfileGetSuccessState extends ProfileState {
 final class ProfileGetFailureState extends ProfileState {
   final String errMessage;
   const ProfileGetFailureState({required this.errMessage});
+  @override
+  List<Object> get props => [errMessage];
+}
+
+//~ logout from firebase
+final class ProfileLogOutLoadingState extends ProfileState {
+  const ProfileLogOutLoadingState();
+}
+
+final class ProfileLogOutSuccessState extends ProfileState {
+  const ProfileLogOutSuccessState();
+}
+
+final class ProfileLogOutFailureState extends ProfileState {
+  final String errMessage;
+  const ProfileLogOutFailureState({required this.errMessage});
   @override
   List<Object> get props => [errMessage];
 }

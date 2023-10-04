@@ -10,6 +10,17 @@ class ProfileRepoImpl extends ProfileRepo {
   ProfileRepoImpl({
     required this.api,
   });
+
+  @override
+  Future<Either<String, UserModel>> getProfile() async {
+    try {
+      final result = await api.getProfile();
+      return right(result);
+    } on FirebaseException catch (e) {
+      return left(e.code.toString());
+    }
+  }
+
   @override
   Future<Either<String, Unit>> logOut() async {
     try {
@@ -25,16 +36,6 @@ class ProfileRepoImpl extends ProfileRepo {
     try {
       await api.logOutUpdateprofile();
       return right(unit);
-    } on FirebaseException catch (e) {
-      return left(e.code.toString());
-    }
-  }
-
-  @override
-  Future<Either<String, UserModel>> getProfile() async {
-    try {
-      final result = await api.getProfile();
-      return right(result);
     } on FirebaseException catch (e) {
       return left(e.code.toString());
     }

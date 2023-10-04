@@ -7,6 +7,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 class ProfileApi {
   final auth = FirebaseAuth.instance;
   final fireStore = FirebaseFirestore.instance;
+
+  Future<UserModel> getProfile() async {
+    final result = await fireStore
+        .collection(AppStrings.usersCollection)
+        .doc(AppStrings.profileDocument)
+        .collection(AppStrings.profileDetailsCollection)
+        .doc(AppStrings.userId)
+        .get();
+    return UserModel.fromJson(result.data()!);
+  }
+
 //~ logout
   Future<void> logOut() async {
     await auth.signOut();
@@ -22,15 +33,5 @@ class ProfileApi {
         .collection(AppStrings.profileDetailsCollection)
         .doc(id)
         .update({'isLoged': false, 'isOnline': false});
-  }
-
-  Future<UserModel> getProfile() async {
-    final result = await fireStore
-        .collection(AppStrings.usersCollection)
-        .doc(AppStrings.profileDocument)
-        .collection(AppStrings.profileDetailsCollection)
-        .doc(AppStrings.userId)
-        .get();
-    return UserModel.fromJson(result.data()!);
   }
 }

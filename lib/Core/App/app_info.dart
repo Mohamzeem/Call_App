@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:call/Core/App/app_dependecies.dart';
+import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/routes/app_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class MyApp {
@@ -13,6 +16,19 @@ class MyApp {
   static AppConfig get config => sl.get<AppConfig>();
   static String appName = 'Call Me';
 
+  static void setSystemUi() {
+    if (Platform.isAndroid) {
+      SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
+        statusBarColor: AppColors.kWhite,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      );
+      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    }
+  }
   // static AppLocalizations? get locale => AppLocalizations.of(MyApp.context);
 
   // static String translate(String langkey) {

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_colors.dart';
-import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_cached_image.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 
@@ -31,8 +30,7 @@ class ListItem extends StatelessWidget {
               CustomCachedImage(
                 width: 45,
                 height: 45,
-                photoUrl:
-                    photoUrl.isEmpty ? AppStrings.defaultAppPhoto : photoUrl,
+                photoUrl: photoUrl,
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: Container(

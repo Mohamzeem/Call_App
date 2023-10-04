@@ -6,6 +6,7 @@ import 'package:call/Core/Widgets/custom_error_loading.dart';
 import 'package:call/Core/Widgets/custom_skelton_shimmer.dart';
 import 'package:call/Core/routes/app_routes.dart';
 import 'package:call/Features/Contacts/presentation/view/widgets/list_item.dart';
+import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,6 +25,8 @@ class _StreamBodyState extends State<StreamBody> {
       .collection(AppStrings.profileDetailsCollection)
       .orderBy('isOnline', descending: true)
       .snapshots();
+
+  UserModel? userModel;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -54,7 +57,7 @@ class _StreamBodyState extends State<StreamBody> {
               ),
             ),
           );
-//~ List has error
+//~ List have error
         } else if (snapshot.hasError) {
           return const CustomErrorLoading(errMsg: 'Server Error Loading !!!');
 //~ List have data
@@ -63,16 +66,17 @@ class _StreamBodyState extends State<StreamBody> {
             child: ListView.builder(
               itemCount: contacts!.length,
               itemBuilder: (context, index) {
-                final item = snapshot.data!.docs[index];
-                if (item['id'] == AppStrings.userId) {
+                final userModel = contacts[index];
+                if (userModel!.id == AppStrings.userId) {
                   return SizedBox(height: 0.h);
                 }
                 return ListItem(
-                  onTap: () => MyApp.navigation
-                      .navigateTo(AppRouter.contactDetailsView, args: item),
-                  photoUrl: item['photo'],
-                  isOnline: item['isOnline'],
-                  name: item['name'],
+                  onTap: () => MyApp.navigation.navigateTo(
+                      AppRouter.contactDetailsView,
+                      args: userModel),
+                  photoUrl: userModel!.photo!,
+                  isOnline: userModel!.isOnline!,
+                  name: userModel!.name!,
                 );
               },
             ),

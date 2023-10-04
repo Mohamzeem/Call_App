@@ -9,12 +9,11 @@ import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 
-class ContactDetailsAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isOnline;
   final String photoUrl;
-  const ContactDetailsAppBar({
+  const ChatAppBar({
     Key? key,
     this.title = '',
     this.isOnline = true,
@@ -59,9 +58,7 @@ class ContactDetailsAppBar extends StatelessWidget
                           child: CustomCachedImage(
                             width: 300,
                             height: 300,
-                            photoUrl: photoUrl.isEmpty
-                                ? AppStrings.defaultAppPhoto
-                                : photoUrl,
+                            photoUrl: photoUrl,
                             child: const SizedBox(),
                           ),
                         ),

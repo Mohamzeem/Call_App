@@ -1,3 +1,4 @@
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
@@ -10,7 +11,6 @@ class UserModel extends Equatable {
   final String? tokenFcm;
   final bool? isLoged;
   final bool? isOnline;
-
   const UserModel({
     this.id,
     this.photo,
@@ -67,7 +67,6 @@ class UserModel extends Equatable {
     SnapshotOptions? options,
   ) {
     final json = snapshot.data();
-
     return UserModel(
       id: json?['id'] ?? "",
       photo: json?['photo'] ?? "",
@@ -96,7 +95,7 @@ class UserModel extends Equatable {
 
   String get isPhoto {
     if (photo!.isEmpty) {
-      return "";
+      return AppStrings.defaultEmail;
     }
     return photo!;
   }

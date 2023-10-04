@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:call/Core/Utils/app_colors.dart';
@@ -19,7 +20,7 @@ class CustomCachedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: photoUrl,
+      imageUrl: photoUrl.isEmpty ? AppStrings.defaultAppPhoto : photoUrl,
       fit: BoxFit.fill,
       imageBuilder: (context, imageProvider) => Container(
         width: width!.w,
