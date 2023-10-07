@@ -18,7 +18,7 @@ class ChatFieldRow extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: 295,
+            width: 295.w,
             child: TextFormField(
               style: const TextStyle(fontSize: 22, color: AppColors.kBlack),
               decoration: InputDecoration(

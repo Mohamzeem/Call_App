@@ -17,4 +17,7 @@ class AppStrings {
   static const String fastCoachingSessionsCollection = 'Fast Coaching Sessions';
   static const String employeesCollection = 'Employees';
   static String notificationsCollection = 'Notifications';
+
+  //~ Agora
+  static String appIdAgora = 'd0e95cf95b5347e39735b2da6d1884a3';
 }

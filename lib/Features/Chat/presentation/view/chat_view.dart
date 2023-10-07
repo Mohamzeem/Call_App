@@ -17,8 +17,10 @@ class ChatView extends StatelessWidget {
           title: userModel.name!,
           photoUrl: userModel.photo!,
           isOnline: userModel.isOnline!,
-          audio: () => MyApp.navigation
-              .navigateTo(AppRouter.audioCallView, args: userModel),
+          audio: () {
+            MyApp.navigation
+                .navigateTo(AppRouter.audioCallView, args: userModel);
+          },
           video: () => MyApp.navigation
               .navigateTo(AppRouter.voiceCallView, args: userModel),
         ),

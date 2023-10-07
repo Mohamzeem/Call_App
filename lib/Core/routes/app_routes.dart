@@ -1,5 +1,5 @@
 import 'package:call/Core/routes/base_routes.dart';
-import 'package:call/Features/Audio_Call/presentation/view/audio_view.dart';
+import 'package:call/Features/Voice_Call/presentation/view/voice_view.dart';
 import 'package:call/Features/Auth/presentation/view/login_view.dart';
 import 'package:call/Features/Chat/presentation/view/chat_view.dart';
 import 'package:call/Features/Contacts/presentation/view/contacts_view.dart';
@@ -8,7 +8,7 @@ import 'package:call/Features/Profile/presentation/view/profile_view.dart';
 import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:call/Features/Register/presentation/view/register_view.dart';
 import 'package:call/Features/Splash/presentation/view/splash_view.dart';
-import 'package:call/Features/Video_Call/presentation/view/audio_view.dart';
+import 'package:call/Features/Video_Call/presentation/view/video_view.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppRouter {
