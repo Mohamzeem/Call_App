@@ -66,17 +66,20 @@ class _StreamBodyState extends State<StreamBody> {
             child: ListView.builder(
               itemCount: contacts!.length,
               itemBuilder: (context, index) {
-                final userModel = contacts[index];
-                if (userModel!.id == AppStrings.userId) {
+                final item = contacts[index];
+                //userModel = item;
+                if (item['id'] == AppStrings.userId) {
                   return SizedBox(height: 0.h);
                 }
                 return ListItem(
-                  onTap: () => MyApp.navigation.navigateTo(
-                      AppRouter.contactDetailsView,
-                      args: userModel),
-                  photoUrl: userModel!.photo!,
-                  isOnline: userModel!.isOnline!,
-                  name: userModel!.name!,
+                  onTap: () => MyApp.navigation
+                      .navigateTo(AppRouter.contactDetailsView, args: item),
+                  photoUrl: item['photo'],
+                  isOnline: item['isOnline'],
+                  name: item['name'],
+                  // photoUrl: userModel!.photo!,
+                  // isOnline: userModel!.isOnline!,
+                  // name: userModel!.name!,
                 );
               },
             ),

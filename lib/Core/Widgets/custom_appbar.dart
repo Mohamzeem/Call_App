@@ -13,11 +13,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isArrowBack;
   final bool isOnline;
   final String photoUrl;
+  final String title;
   final bool isProfile;
   const CustomAppBar({
     Key? key,
     this.isArrowBack = false,
     this.isOnline = true,
+    this.title = '',
     this.photoUrl = AppStrings.defaultAppPhoto,
     this.isProfile = false,
   })  : preferredSize = const Size.fromHeight(kToolbarHeight),
@@ -39,7 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : const SizedBox(),
       title: CustomText(
-        text: isProfile ? 'Profile' : 'Call Me',
+        text: title,
         fontType: FontType.medium32,
         color: AppColors.mainColor,
       ),

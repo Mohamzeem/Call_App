@@ -18,7 +18,6 @@ class _ChatBodyState extends State<ChatBody> {
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text('Message'),
           ChatFieldRow(),
         ],
       ),

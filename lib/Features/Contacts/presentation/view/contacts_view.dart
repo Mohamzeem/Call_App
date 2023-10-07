@@ -15,29 +15,31 @@ class ContactsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: BlocProvider(
-      //! cubit changed + add repImpl
-      create: (context) => ContactsCubit(repo: sl.get<ContactsRepoImpl>()),
-      child: Scaffold(
-        appBar: CustomAppBar(
-          isArrowBack: true,
-          photoUrl: BlocProvider.of<ProfileCubit>(context).userModel!.photo!,
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: AppPadding().h20,
-            horizontal: AppPadding().h20,
+      child: BlocProvider(
+        //! cubit changed + add repImpl
+        create: (context) => ContactsCubit(repo: sl.get<ContactsRepoImpl>()),
+        child: Scaffold(
+          appBar: CustomAppBar(
+            title: 'Contacts',
+            isArrowBack: true,
+            photoUrl: BlocProvider.of<ProfileCubit>(context).userModel!.photo!,
           ),
-          child: Column(
-            children: [
-              //! body changed
-              const ContactsBody(),
-              //const StreamBody(),
-              SizedBox(height: 20.h),
-            ],
+          body: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: AppPadding().h20,
+              horizontal: AppPadding().h20,
+            ),
+            child: Column(
+              children: [
+                //! body changed
+                const ContactsBody(),
+                //   const StreamBody(),
+                SizedBox(height: 20.h),
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

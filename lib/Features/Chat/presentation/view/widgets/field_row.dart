@@ -8,61 +8,58 @@ class ChatFieldRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          border: Border.all(
+            color: AppColors.mainColor,
+            width: 0.5,
+          )),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 320.w,
-            height: 50.h,
+            width: 295,
             child: TextFormField(
-              style: const TextStyle(
-                fontSize: 22,
-                color: AppColors.kBlack,
-              ),
+              style: const TextStyle(fontSize: 22, color: AppColors.kBlack),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
-                  vertical: 0,
+                  vertical: 0.h,
                   horizontal: AppPadding().w10,
                 ),
-                suffixIcon: Icon(
-                  Icons.send,
-                  color: AppColors.mainColor,
-                  size: 30.r,
-                ),
                 border: const OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 0.5, color: AppColors.mainColor),
+                  borderSide: BorderSide(width: 0.5, color: AppColors.kWhite),
                 ),
                 enabledBorder: const OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 0.5, color: AppColors.mainColor),
+                  borderSide: BorderSide(width: 0.5, color: AppColors.kWhite),
                 ),
                 focusedBorder: const OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 0.5, color: AppColors.mainColor),
+                  borderSide: BorderSide(width: 0.5, color: AppColors.kWhite),
                 ),
                 errorBorder: const OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 0.5, color: AppColors.mainColor),
+                  borderSide: BorderSide(width: 0.5, color: AppColors.kWhite),
                 ),
                 focusedErrorBorder: const OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 0.5, color: AppColors.mainColor),
+                  borderSide: BorderSide(width: 0.5, color: AppColors.kWhite),
                 ),
               ),
             ),
           ),
-          InkWell(
-            onTap: () {},
-            child: const Icon(
-              Icons.add_circle_outline,
-              color: AppColors.mainColor,
-              size: 40,
-            ),
-          )
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.attach_file_rounded,
+                color: AppColors.mainColor,
+                size: 30.r,
+              ),
+              SizedBox(width: 5.w),
+              Icon(
+                Icons.camera_alt,
+                color: AppColors.mainColor,
+                size: 30.r,
+              ),
+            ],
+          ),
         ],
       ),
     );

@@ -29,6 +29,7 @@ class _HomeViewState extends State<HomeView> {
             builder: (context, state) {
               if (state is ProfileGetSuccessState) {
                 return CustomAppBar(
+                  title: 'Call Me',
                   photoUrl:
                       BlocProvider.of<ProfileCubit>(context).userModel!.photo!,
                 );

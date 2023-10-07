@@ -1,3 +1,5 @@
+import 'package:call/Core/App/app_info.dart';
+import 'package:call/Core/routes/app_routes.dart';
 import 'package:call/Features/Chat/presentation/view/widgets/appbar.dart';
 import 'package:call/Features/Chat/presentation/view/widgets/body.dart';
 import 'package:call/Features/Register/data/models/user_model.dart';
@@ -15,6 +17,10 @@ class ChatView extends StatelessWidget {
           title: userModel.name!,
           photoUrl: userModel.photo!,
           isOnline: userModel.isOnline!,
+          audio: () => MyApp.navigation
+              .navigateTo(AppRouter.audioCallView, args: userModel),
+          video: () => MyApp.navigation
+              .navigateTo(AppRouter.voiceCallView, args: userModel),
         ),
         body: const ChatBody(),
       ),
