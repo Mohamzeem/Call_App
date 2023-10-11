@@ -19,7 +19,7 @@ final class ContactsEmptyState extends ContactsState {
 }
 
 final class ContactsSuccessState extends ContactsState {
-  final List<UserModel> contactsList;
+  final List<ContactModel> contactsList;
   const ContactsSuccessState({required this.contactsList});
   @override
   List<Object> get props => [contactsList];

@@ -8,7 +8,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthApi {
   final firestore = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance;
-  UserModel? userModel;
 
 //~ login in with email and password
   Future<UserCredential> login(
