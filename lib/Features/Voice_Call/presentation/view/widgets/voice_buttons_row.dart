@@ -1,29 +1,26 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:call/Features/Voice_Call/data/audio_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 
-class VoiceCallButtonsRow extends StatefulWidget {
+class VoiceCallButtonsRow extends StatelessWidget {
   final VoidCallback callButton;
+  final bool isCalling;
   final VoidCallback micButton;
+  final bool micOn;
   final VoidCallback speakerButton;
+  final bool speakerOn;
   const VoiceCallButtonsRow({
     Key? key,
     required this.callButton,
+    required this.isCalling,
     required this.micButton,
+    required this.micOn,
     required this.speakerButton,
+    required this.speakerOn,
   }) : super(key: key);
-
-  @override
-  State<VoiceCallButtonsRow> createState() => _VoiceCallButtonsRowState();
-}
-
-class _VoiceCallButtonsRowState extends State<VoiceCallButtonsRow> {
-  bool isCalling = true;
-  bool micOn = true;
-  bool speakerOn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +36,14 @@ class _VoiceCallButtonsRowState extends State<VoiceCallButtonsRow> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           InkWell(
-            onTap: () {
-              widget.micButton;
-              setState(() => micOn = !micOn);
-            },
+            onTap: micButton,
             child: Icon(
               micOn ? Icons.mic_none_rounded : Icons.mic_off,
               size: 35,
             ),
           ),
           InkWell(
-            onTap: () {
-              widget.callButton;
-              // setState(() => isCalling = !isCalling);
-            },
+            onTap: callButton,
             child: Container(
               height: 50.h,
               width: 50.w,
@@ -67,10 +58,7 @@ class _VoiceCallButtonsRowState extends State<VoiceCallButtonsRow> {
             ),
           ),
           InkWell(
-            onTap: () {
-              widget.speakerButton;
-              setState(() => speakerOn = !speakerOn);
-            },
+            onTap: speakerButton,
             child: Icon(
               speakerOn ? Icons.volume_up_sharp : Icons.volume_off,
               size: 35,

@@ -2,6 +2,7 @@ import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
+import 'package:call/Core/Widgets/custom_toast.dart';
 import 'package:call/Features/Voice_Call/data/audio_services.dart';
 import 'package:call/Features/Voice_Call/presentation/view/widgets/voice_buttons_row.dart';
 import 'package:call/Features/Voice_Call/presentation/view_model/voice_call_cubit/voice_call_cubit.dart';
@@ -29,10 +30,15 @@ class _VoiceCallBodyState extends State<VoiceCallBody> {
   void initState() {
     super.initState();
     context.read<VoiceCallCubit>().initEngine();
-    context.read<VoiceCallCubit>().isCalling
+    context.read<VoiceCallCubit>().isCalling == true
         ? VoiceServices().joinVoiceCall()
         : VoiceServices().leaveVoiceCall();
-    debugPrint('####voice view initialized');
+  }
+
+  @override
+  void dispose() {
+    context.read<VoiceCallCubit>().leaveVoiceCall();
+    super.dispose();
   }
 
   @override
@@ -64,16 +70,51 @@ class _VoiceCallBodyState extends State<VoiceCallBody> {
             color: AppColors.kGrey1,
           ),
           const Spacer(),
-          VoiceCallButtonsRow(
-            callButton: () {
-              BlocProvider.of<VoiceCallCubit>(context).leaveVoiceCall();
-              debugPrint('#### left call');
-
-              MyApp.navigation.goBack();
-              debugPrint('#### go back');
+          BlocBuilder<VoiceCallCubit, VoiceCallState>(
+            builder: (context, state) {
+              final cubit = BlocProvider.of<VoiceCallCubit>(context);
+              return VoiceCallButtonsRow(
+                isCalling: cubit.isCalling,
+                micOn: cubit.micOn,
+                speakerOn: cubit.speakerOn,
+                micButton: () {
+                  cubit.editMicOn();
+                  // debugPrint('#### ${cubit.micOn}');
+                  if (cubit.micOn == true) {
+                    CustomToast().showToastSuccessTop(
+                        context: context, message: 'Mic On');
+                  } else {
+                    CustomToast().showToastErrorTop(
+                        context: context, message: 'Mic Off');
+                  }
+                },
+                callButton: () {
+                  cubit.leaveVoiceCall();
+                  MyApp.navigation.goBack();
+                  // debugPrint('#### go back');
+                  cubit.editIsCalling();
+                  // debugPrint('#### ${cubit.isCalling}');
+                  if (cubit.isCalling == false) {
+                    CustomToast().showToastSuccessTop(
+                        context: context, message: 'Call Ended');
+                  } else {
+                    CustomToast().showToastErrorTop(
+                        context: context, message: 'Call Cancelled');
+                  }
+                },
+                speakerButton: () {
+                  cubit.editSpeakerOn();
+                  // debugPrint('#### ${cubit.speakerOn}');
+                  if (cubit.speakerOn == true) {
+                    CustomToast().showToastSuccessTop(
+                        context: context, message: 'Speaker On');
+                  } else {
+                    CustomToast().showToastErrorTop(
+                        context: context, message: 'Speaker Off');
+                  }
+                },
+              );
             },
-            micButton: () {},
-            speakerButton: () {},
           ),
           SizedBox(height: 30.h)
         ],

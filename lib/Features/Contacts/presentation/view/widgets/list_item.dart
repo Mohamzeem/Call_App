@@ -84,7 +84,7 @@ class ListItem extends StatelessWidget {
               ),
               SizedBox(width: 20.w),
               SizedBox(
-                width: 260,
+                width: 260.w,
                 child: CustomText(
                   text: name,
                   textOverflow: TextOverflow.ellipsis,

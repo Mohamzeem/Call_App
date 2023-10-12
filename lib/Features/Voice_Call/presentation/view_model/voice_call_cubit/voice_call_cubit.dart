@@ -1,4 +1,5 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:call/Core/Services/prints/prints_service.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -14,45 +15,63 @@ class VoiceCallCubit extends Cubit<VoiceCallState> {
   bool isCalling = true;
   bool micOn = true;
   bool speakerOn = false;
+
+  void editIsCalling() {
+    isCalling = !isCalling;
+    emit(VoiceCallCallingState(isCalling: isCalling));
+  }
+
+  void editMicOn() {
+    micOn = !micOn;
+    emit(VoiceCallMicOnState(micOn: micOn));
+  }
+
+  void editSpeakerOn() {
+    speakerOn = !speakerOn;
+    emit(VoiceCallSpeakerOnState(speakerOn: speakerOn));
+  }
+
   final player = AudioPlayer();
   late final RtcEngine engine;
   final ChannelProfileType channelProfileType =
       ChannelProfileType.channelProfileCommunication;
 
-//! initialization RtcEngine
-//todo: initialize in the voiceview
+//~ initialize RtcEngine in the voiceview
   Future<void> initEngine() async {
     //~ set the ringtone
-    // await player.setAsset('assets/sound/notification.mp3');
-    // debugPrint('#### player');
+    await player.setAsset('assets/sound/notification.mp3');
 
     //~ initialize
     engine = createAgoraRtcEngine();
     await engine.initialize(RtcEngineContext(appId: AppStrings.appIdAgora));
-    debugPrint('#### engine.initialize');
-
+    Prints.success(message: '### RTC ENGINE Initialized');
     //~ handel events
     engine.registerEventHandler(RtcEngineEventHandler(
       onError: (ErrorCodeType err, String msg) {
         debugPrint('Error: $err,Mg: $msg');
       },
       onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-        debugPrint('JoinChannelSuccess: ${connection.toJson()}');
-        //todo: state changed to joined channel
-        emit(const VoiceCallCalling(isCalling: true));
+        Prints.success(
+            message:
+                '### JoinChannelSuccess: ${connection.toJson()} + ### $isCalling');
+        //! state changed to joined channel
+        emit(const VoiceCallCallingState(isCalling: false));
+        isCalling = false;
+        Prints.debug(message: '### IsCallingState: $isCalling');
       },
       onUserJoined:
           (RtcConnection connection, int remoteUid, int elapsed) async {
         await player.pause();
-        debugPrint('User joined Successfully \n ${connection.toJson()}');
+        Prints.success(
+            message: '### UserjoinedSuccessfully: ${connection.toJson()}');
       },
       onLeaveChannel: (RtcConnection connection, RtcStats stats) {
-        debugPrint('User left Call \n ${stats.toJson()}');
-        //todo: state changed to left channel
-        emit(const VoiceCallCalling(isCalling: false));
+        Prints.error(message: '### UserleftCall: ${stats.toJson()}');
+        //! state changed to left channel
+        emit(const VoiceCallCallingState(isCalling: false));
       },
       onRtcStats: (RtcConnection connection, RtcStats stats) {
-        debugPrint('Time: ${stats.duration}');
+        Prints.debug(message: '### Time: ${stats.duration}');
       },
     ));
 
@@ -62,27 +81,30 @@ class VoiceCallCubit extends Cubit<VoiceCallState> {
         profile: AudioProfileType.audioProfileDefault,
         scenario: AudioScenarioType.audioScenarioGameStreaming);
 
-    joinVoiceCall();
+    await joinVoiceCall();
   }
 
 //~ join the call
-  void joinVoiceCall() async {
+  joinVoiceCall() async {
     await Permission.microphone.request();
     await engine.joinChannel(
         token:
-            '007eJxTYPCcmzfT8tPc+Q/duz2NpV++eV7vVWEy+dRRhsj9HKmVPHEKDCkGqZamyWmWpkmmxibmqcaW5samSUYpiWYphhYWJonGbf6KqQ2BjAz5c/8wMTIwMrAAMYjPBCaZwSQLmGRjyM3PSMwsYmAAAMA4Ik4=',
-        channelId: 'mohair',
+            '007eJxTYFj06brbfU7TSwWMS0VWrVCNXbll3lre++c2tfiL3rsh3yilwJBikGppmpxmaZpkamxinmpsaW5smmSUkmiWYmhhYZJoXLlYKbUhkJHh7lxORkYGRgYWIAbxmcAkM5hkAZOsDInFKYkpDAwA03wiPQ==',
+        channelId: 'asdad',
         uid: 0,
         options: ChannelMediaOptions(
           channelProfile: channelProfileType,
           clientRoleType: ClientRoleType.clientRoleBroadcaster,
         ));
+    Prints.success(message: '### Joined Voice Call Successfully');
   }
 
   //~ leave the call
-  void leaveVoiceCall() async {
+  leaveVoiceCall() async {
+    await player.pause();
     await engine.leaveChannel();
     await engine.release();
     await player.stop();
+    Prints.error(message: '### RTC ENGINE STOPPED');
   }
 }
