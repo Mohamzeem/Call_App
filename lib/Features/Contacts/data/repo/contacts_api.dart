@@ -1,10 +1,10 @@
 import 'package:call/Core/Utils/app_strings.dart';
-import 'package:call/Features/Register/data/models/user_model.dart';
+import 'package:call/Features/Contacts/data/models/contact_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ContactsApi {
   final firestore = FirebaseFirestore.instance;
-  Future<List<UserModel>> getAllContacts() async {
+  Future<List<ContactModel>> getAllContacts() async {
     var result = await firestore
         .collection(AppStrings.usersCollection)
         .doc(AppStrings.profileDocument)
@@ -12,7 +12,7 @@ class ContactsApi {
         .orderBy('isOnline', descending: true)
         .get();
     return result.docs
-        .map((value) => UserModel.fromJson(value.data()))
+        .map((value) => ContactModel.fromJson(value.data()))
         .toList();
   }
 }

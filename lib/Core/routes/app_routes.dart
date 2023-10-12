@@ -1,4 +1,5 @@
 import 'package:call/Core/routes/base_routes.dart';
+import 'package:call/Features/Contacts/data/models/contact_model.dart';
 import 'package:call/Features/Voice_Call/presentation/view/voice_view.dart';
 import 'package:call/Features/Auth/presentation/view/login_view.dart';
 import 'package:call/Features/Chat/presentation/view/chat_view.dart';
@@ -38,11 +39,11 @@ abstract class AppRouter {
       case contactsView:
         return BaseRoute(const ContactsView());
       case contactDetailsView:
-        return BaseRoute(ChatView(userModel: args as UserModel));
+        return BaseRoute(ChatView(contactModel: args as ContactModel));
       case audioCallView:
-        return BaseRoute(VoiceCallView(userModel: args as UserModel));
+        return BaseRoute(VoiceCallView(contactModel: args as ContactModel));
       case voiceCallView:
-        return BaseRoute(VideoCallView(userModel: args as UserModel));
+        return BaseRoute(VideoCallView(contactModel: args as ContactModel));
 
       default:
         return BaseRoute(const SplashView());
