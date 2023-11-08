@@ -6,7 +6,6 @@ import 'package:call/Features/Chat/presentation/view/chat_view.dart';
 import 'package:call/Features/Contacts/presentation/view/contacts_view.dart';
 import 'package:call/Features/Home/presentation/view/home_view.dart';
 import 'package:call/Features/Profile/presentation/view/profile_view.dart';
-import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:call/Features/Register/presentation/view/register_view.dart';
 import 'package:call/Features/Splash/presentation/view/splash_view.dart';
 import 'package:call/Features/Video_Call/presentation/view/video_view.dart';

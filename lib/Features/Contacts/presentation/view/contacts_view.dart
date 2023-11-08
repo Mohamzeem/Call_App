@@ -1,10 +1,10 @@
 import 'package:call/Core/App/app_dependecies.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_appbar.dart';
+import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:call/Features/Contacts/data/repo/contacts_repo_impl.dart';
 import 'package:call/Features/Contacts/presentation/view/widgets/contacts_body.dart';
 import 'package:call/Features/Contacts/presentation/view_model/contacts_cubit/contacts_cubit.dart';
-import 'package:call/Features/Profile/presentation/view_model.dart/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +22,7 @@ class ContactsView extends StatelessWidget {
           appBar: CustomAppBar(
             title: 'Contacts',
             isArrowBack: true,
-            photoUrl: BlocProvider.of<ProfileCubit>(context).userModel!.photo!,
+            photoUrl: BlocProvider.of<AuthCubit>(context).userModel!.photo!,
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(

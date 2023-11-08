@@ -1,7 +1,8 @@
+import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Widgets/custom_appbar.dart';
+import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:call/Features/Home/presentation/view/widgets/floating_icon.dart';
 import 'package:call/Features/Home/presentation/view/widgets/body.dart';
-import 'package:call/Features/Profile/presentation/view_model.dart/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ProfileCubit>(context).getProfile();
+    BlocProvider.of<AuthCubit>(context).getProfile();
   }
 
   @override
@@ -25,13 +26,13 @@ class _HomeViewState extends State<HomeView> {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65),
-          child: BlocBuilder<ProfileCubit, ProfileState>(
+          child: BlocBuilder<AuthCubit, AuthState>(
             builder: (context, state) {
-              if (state is ProfileGetSuccessState) {
+              if (state is AuthGetProfileSuccessState) {
                 return CustomAppBar(
                   title: 'Call Me',
                   photoUrl:
-                      BlocProvider.of<ProfileCubit>(context).userModel!.photo!,
+                      BlocProvider.of<AuthCubit>(context).userModel!.photo!,
                 );
               }
               return const CustomAppBar();

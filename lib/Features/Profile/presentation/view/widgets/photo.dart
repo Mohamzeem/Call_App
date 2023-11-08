@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
-import 'package:call/Features/Profile/presentation/view_model.dart/cubit/profile_cubit.dart';
+import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,9 +14,9 @@ class ProfilePhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: AppPadding().h20),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
+      child: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
-          if (state is ProfileGetSuccessState) {
+          if (state is AuthGetProfileSuccessState) {
             return Center(
               child: InkWell(
                 onTap: () {},
@@ -53,7 +53,7 @@ class ProfilePhoto extends StatelessWidget {
                 ),
               ),
             );
-          } else if (state is ProfileGetLoadingState) {
+          } else if (state is AuthGetProfileLoadingState) {
             return Center(
               child: Container(
                 decoration: BoxDecoration(

@@ -6,7 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthApi {
-  final firestore = FirebaseFirestore.instance;
+  final fireStore = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance;
 
 //~ login in with email and password
@@ -31,10 +31,21 @@ class AuthApi {
     return await auth.signInWithCredential(credential);
   }
 
+//~ get user peofile
+  Future<UserModel> getProfile() async {
+    final result = await fireStore
+        .collection(AppStrings.usersCollection)
+        .doc(AppStrings.profileDocument)
+        .collection(AppStrings.profileDetailsCollection)
+        .doc(AppStrings.userId)
+        .get();
+    return UserModel.fromJson(result.data()!);
+  }
+
 //~ update user status in firebase
   Future<void> updateUserStatus() async {
     final id = auth.currentUser!.uid;
-    await firestore
+    await fireStore
         .collection(AppStrings.usersCollection)
         .doc(AppStrings.profileDocument)
         .collection(AppStrings.profileDetailsCollection)
@@ -52,7 +63,7 @@ class AuthApi {
     String? token = await FirebaseMessaging.instance.getToken();
     final userModel =
         UserModel(id: id, name: name, email: email, photo: photoUrl);
-    await firestore
+    await fireStore
         .collection(AppStrings.usersCollection)
         .doc(AppStrings.profileDocument)
         .collection(AppStrings.profileDetailsCollection)

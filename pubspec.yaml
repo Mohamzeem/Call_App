@@ -65,6 +65,11 @@ dependencies:
   permission_handler: ^11.0.1
   fluttertoast: ^8.2.2
 
+  #zego
+  zego_uikit: ^2.14.3
+  zego_uikit_prebuilt_call: ^3.17.2
+  zego_uikit_signaling_plugin: ^2.6.2
+
 
 dev_dependencies:
   flutter_test:

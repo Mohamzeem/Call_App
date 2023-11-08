@@ -1,3 +1,5 @@
+import 'package:call/Features/Register/data/models/user_model.dart';
+
 class AppStrings {
   AppStrings();
 
@@ -19,5 +21,10 @@ class AppStrings {
   static String notificationsCollection = 'Notifications';
 
   //~ Agora
-  static String appIdAgora = 'd0e95cf95b5347e39735b2da6d1884a3';
+  static String agoraAppId = 'd0e95cf95b5347e39735b2da6d1884a3';
+
+  //~ Zego Cloud
+  static const int zegoAppID = 873584565;
+  static const String zegoAppSign =
+      '25389dba7fe01f88621a96d6b7c1075c4841dd562e7f7d499d76b924731287bf';
 }

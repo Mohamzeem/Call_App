@@ -1,5 +1,4 @@
 import 'package:call/Core/Utils/app_strings.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class UserModel extends Equatable {
@@ -49,50 +48,6 @@ class UserModel extends Equatable {
     };
   }
 
-  Map<String, dynamic> toFirestore() {
-    return <String, dynamic>{
-      'id': id,
-      'photo': photo ?? "",
-      'name': name ?? "",
-      'email': email ?? "",
-      'mobileNum': mobileNum ?? "",
-      'tokenFcm': tokenFcm,
-      'isLoged': isLoged,
-      'isOnline': isOnline,
-    };
-  }
-
-  factory UserModel.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> snapshot,
-    SnapshotOptions? options,
-  ) {
-    final json = snapshot.data();
-    return UserModel(
-      id: json?['id'] ?? "",
-      photo: json?['photo'] ?? "",
-      name: json?['name'] ?? "",
-      email: json?['email'] ?? "",
-      mobileNum: json?['mobileNum'] ?? "",
-      tokenFcm: json?['tokenFcm'] ?? "",
-      isLoged: json?['isLoged'] ?? false,
-      isOnline: json?['isOnline'] ?? false,
-    );
-  }
-
-  Map<String, dynamic> toUpdateJson({
-    required String photo,
-    required String name,
-    required String mobileNum,
-    required String tokenFcm,
-  }) {
-    return <String, dynamic>{
-      'photo': photo,
-      'name': name,
-      'mobileNum': mobileNum,
-      'tokenFcm': tokenFcm,
-    };
-  }
-
   String get isPhoto {
     if (photo!.isEmpty) {
       return AppStrings.defaultEmail;
@@ -102,5 +57,5 @@ class UserModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [id, photo, name, email, mobileNum, tokenFcm, isLoged];
+      [id, photo, name, email, mobileNum, tokenFcm, isLoged, isOnline];
 }

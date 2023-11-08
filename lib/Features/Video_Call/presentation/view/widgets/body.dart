@@ -57,7 +57,7 @@ class _VideoCallBodyState extends State<VideoCallBody> {
               MyApp.navigation.goBack();
             },
             micButton: () async {
-              Prints.route(message: 'White foreground with a peach background');
+              Prints.route('White foreground with a peach background');
             },
             speakerButton: () {
               Prints.debug(message: 'White foreground with a peach background');

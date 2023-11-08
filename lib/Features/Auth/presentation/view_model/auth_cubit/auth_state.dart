@@ -53,6 +53,25 @@ class LoginWithGoogleFailureState extends AuthState {
   List<Object> get props => [errMessage];
 }
 
+//~ get user profile from firebase
+final class AuthGetProfileLoadingState extends AuthState {
+  const AuthGetProfileLoadingState();
+}
+
+final class AuthGetProfileSuccessState extends AuthState {
+  final UserModel userModel;
+  const AuthGetProfileSuccessState({required this.userModel});
+  @override
+  List<Object> get props => [userModel];
+}
+
+final class AuthGetProfileFailureState extends AuthState {
+  final String errMessage;
+  const AuthGetProfileFailureState({required this.errMessage});
+  @override
+  List<Object> get props => [errMessage];
+}
+
 //~login with google
 class LoginWithFaceBookLoadingState extends AuthState {
   const LoginWithFaceBookLoadingState();
@@ -101,4 +120,20 @@ class ForgotPasswordFailureState extends AuthState {
   });
   @override
   List<Object> get props => [];
+}
+
+//~ logout from firebase
+final class AuthLogOutLoadingState extends AuthState {
+  const AuthLogOutLoadingState();
+}
+
+final class AuthLogOutSuccessState extends AuthState {
+  const AuthLogOutSuccessState();
+}
+
+final class AuthLogOutFailureState extends AuthState {
+  final String errMessage;
+  const AuthLogOutFailureState({required this.errMessage});
+  @override
+  List<Object> get props => [errMessage];
 }

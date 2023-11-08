@@ -43,8 +43,8 @@ class VoiceCallCubit extends Cubit<VoiceCallState> {
 
     //~ initialize
     engine = createAgoraRtcEngine();
-    await engine.initialize(RtcEngineContext(appId: AppStrings.appIdAgora));
-    Prints.success(message: '### RTC ENGINE Initialized');
+    await engine.initialize(RtcEngineContext(appId: AppStrings.agoraAppId));
+    Prints.success(message: '### RTC ENGINE Initialized', endPoint: '');
     //~ handel events
     engine.registerEventHandler(RtcEngineEventHandler(
       onError: (ErrorCodeType err, String msg) {
@@ -53,7 +53,8 @@ class VoiceCallCubit extends Cubit<VoiceCallState> {
       onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
         Prints.success(
             message:
-                '### JoinChannelSuccess: ${connection.toJson()} + ### $isCalling');
+                '### JoinChannelSuccess: ${connection.toJson()} + ### $isCalling',
+            endPoint: '');
         //! state changed to joined channel
         emit(const VoiceCallCallingState(isCalling: false));
         isCalling = false;
@@ -63,10 +64,12 @@ class VoiceCallCubit extends Cubit<VoiceCallState> {
           (RtcConnection connection, int remoteUid, int elapsed) async {
         await player.pause();
         Prints.success(
-            message: '### UserjoinedSuccessfully: ${connection.toJson()}');
+            message: '### UserjoinedSuccessfully: ${connection.toJson()}',
+            endPoint: '');
       },
       onLeaveChannel: (RtcConnection connection, RtcStats stats) {
-        Prints.error(message: '### UserleftCall: ${stats.toJson()}');
+        Prints.error(
+            message: '### UserleftCall: ${stats.toJson()}', endPoint: '');
         //! state changed to left channel
         emit(const VoiceCallCallingState(isCalling: false));
       },
@@ -96,7 +99,7 @@ class VoiceCallCubit extends Cubit<VoiceCallState> {
           channelProfile: channelProfileType,
           clientRoleType: ClientRoleType.clientRoleBroadcaster,
         ));
-    Prints.success(message: '### Joined Voice Call Successfully');
+    Prints.success(message: '### Joined Voice Call Successfully', endPoint: '');
   }
 
   //~ leave the call
@@ -105,6 +108,6 @@ class VoiceCallCubit extends Cubit<VoiceCallState> {
     await engine.leaveChannel();
     await engine.release();
     await player.stop();
-    Prints.error(message: '### RTC ENGINE STOPPED');
+    Prints.error(message: '### RTC ENGINE STOPPED', endPoint: '');
   }
 }

@@ -1,14 +1,11 @@
 import 'package:call/Core/Utils/app_strings.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class ContactModel extends Equatable {
   final String? id;
   final String? photo;
   final String? name;
-
   final String? tokenFcm;
-
   final bool? isOnline;
   const ContactModel({
     this.id,
@@ -41,7 +38,7 @@ class ContactModel extends Equatable {
 
   String get isPhoto {
     if (photo!.isEmpty) {
-      return AppStrings.defaultEmail;
+      return AppStrings.defaultAppPhoto;
     }
     return photo!;
   }

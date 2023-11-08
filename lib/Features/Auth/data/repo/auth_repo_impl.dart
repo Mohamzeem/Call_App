@@ -1,5 +1,6 @@
 import 'package:call/Features/Auth/data/repo/auth_api.dart';
 import 'package:call/Features/Auth/data/repo/auth_repo.dart';
+import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -32,6 +33,16 @@ class AuthRepoImpl implements AuthRepo {
       final result = await api.loginWithGoogle();
       return right(result);
     } on FirebaseAuthException catch (e) {
+      return left(e.code.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, UserModel>> getProfile() async {
+    try {
+      final result = await api.getProfile();
+      return right(result);
+    } on FirebaseException catch (e) {
       return left(e.code.toString());
     }
   }

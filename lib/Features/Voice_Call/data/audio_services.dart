@@ -17,7 +17,7 @@ class VoiceServices {
     await player.setAsset('assets/sound/notification.mp3');
     //~ initialize
     engine = createAgoraRtcEngine();
-    await engine.initialize(RtcEngineContext(appId: AppStrings.appIdAgora));
+    await engine.initialize(RtcEngineContext(appId: AppStrings.agoraAppId));
 
     //~ handel events
     engine.registerEventHandler(RtcEngineEventHandler(
