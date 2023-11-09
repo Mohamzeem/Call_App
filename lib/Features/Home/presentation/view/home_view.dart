@@ -31,11 +31,10 @@ class _HomeViewState extends State<HomeView> {
               if (state is AuthGetProfileSuccessState) {
                 return CustomAppBar(
                   title: 'Call Me',
-                  photoUrl:
-                      BlocProvider.of<AuthCubit>(context).userModel!.photo!,
+                  photoUrl: state.userModel.photo!,
                 );
               }
-              return const CustomAppBar();
+              return const CustomAppBar(title: 'Call Me');
             },
           ),
         ),

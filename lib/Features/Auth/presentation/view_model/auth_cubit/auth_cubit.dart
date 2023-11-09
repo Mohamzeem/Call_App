@@ -117,10 +117,10 @@ class AuthCubit extends Cubit<AuthState> {
 //~ init zego service
   Future _initZego() async {
     ZegoUIKitPrebuiltCallInvitationService().init(
-      appID: AppStrings.zegoAppID /*input your AppID*/,
-      appSign: AppStrings.zegoAppSign /*input your AppSign*/,
-      userID: userModel!.id!,
-      userName: userModel!.name!,
+      appID: AppStrings.zegoAppID,
+      appSign: AppStrings.zegoAppSign,
+      userID: MyApp.currentUser!.id!,
+      userName: MyApp.currentUser!.name!,
       notifyWhenAppRunningInBackgroundOrQuit: false,
       plugins: [ZegoUIKitSignalingPlugin()],
       requireConfig: (ZegoCallInvitationData data) {

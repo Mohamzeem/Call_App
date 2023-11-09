@@ -17,10 +17,12 @@ class MyApp {
       sl.get<AppNavigation>().navigatorKey.currentContext!;
 
   static AppConfig get config => sl.get<AppConfig>();
+
   static String appName = 'Call Me';
   static UserModel? get currentUser =>
       BlocProvider.of<AuthCubit>(context).userModel;
 
+//~ appbar states
   static void setSystemUi() {
     if (Platform.isAndroid) {
       SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
@@ -34,27 +36,15 @@ class MyApp {
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     }
   }
-  // static AppLocalizations? get locale => AppLocalizations.of(MyApp.context);
-
-  // static String translate(String langkey) {
-  //   return locale!.translate(langkey).toString();
-  // }
-
-///// to get employee or coach roles
-//   static bool get isRoleEmployee {
-//     if (AppStrings.role == "Employee"){
-//       return true;
-//     }
-//     return false;
-//   }
 }
 
+//~ screen utiles size
 class AppConfig {
   AppConfig();
   final Size designSize = const Size(411.42857142857144, 867.4285714285714);
 }
 
-// to get system app info and app version build
+//~ to get system app info and app version build
 class AppInfoUtil {
   Future<String> getAppVersion(BuildContext context) async {
     String buildNumberText = "";

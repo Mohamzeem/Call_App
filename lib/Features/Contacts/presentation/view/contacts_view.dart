@@ -1,5 +1,7 @@
 import 'package:call/Core/App/app_dependecies.dart';
+import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Utils/app_padding.dart';
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_appbar.dart';
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:call/Features/Contacts/data/repo/contacts_repo_impl.dart';
@@ -22,7 +24,9 @@ class ContactsView extends StatelessWidget {
           appBar: CustomAppBar(
             title: 'Contacts',
             isArrowBack: true,
-            photoUrl: BlocProvider.of<AuthCubit>(context).userModel!.photo!,
+            photoUrl: MyApp.currentUser!.photo!.isEmpty
+                ? AppStrings.defaultAppPhoto
+                : MyApp.currentUser!.photo!,
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(
