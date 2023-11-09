@@ -12,10 +12,11 @@ class ProfileView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(
-            title:
-                'Hello,,, ${BlocProvider.of<AuthCubit>(context).userModel!.name!}',
-            isProfile: true,
-            isArrowBack: true),
+          title:
+              'Hello,,, ${BlocProvider.of<AuthCubit>(context).userModel!.name!}',
+          isProfile: true,
+          isArrowBack: true,
+        ),
         body: const ProfileBody(),
       ),
     );

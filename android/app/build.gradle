@@ -71,5 +71,6 @@ flutter {
 
 dependencies {
     implementation "androidx.activity:activity:1.6.0-alpha05"
+    implementation 'com.google.firebase:firebase-messaging:21.1.0'
     // implementation 'io.agora.rtc:<artifact id>:<version>'
 }

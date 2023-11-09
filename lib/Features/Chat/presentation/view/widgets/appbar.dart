@@ -77,16 +77,16 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Icon(
             Icons.call_rounded,
             color: AppColors.mainColor,
-            size: 30.r,
+            size: 32.r,
           ),
         ),
-        SizedBox(width: 8.w),
+        SizedBox(width: 10.w),
         InkWell(
           onTap: video,
           child: Icon(
             Icons.video_camera_front_rounded,
             color: AppColors.mainColor,
-            size: 30.r,
+            size: 32.r,
           ),
         ),
         SizedBox(width: 15.w),

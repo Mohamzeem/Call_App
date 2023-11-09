@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
@@ -24,6 +25,7 @@ class ProfilePhoto extends StatelessWidget {
                   imageUrl: state.userModel.photo!.isEmpty
                       ? AppStrings.defaultAppPhoto
                       : state.userModel.photo!,
+                  //     : MyApp.currentUser!.photo!,
                   fit: BoxFit.fill,
                   imageBuilder: (context, imageProvider) => Container(
                     width: 120.h,
