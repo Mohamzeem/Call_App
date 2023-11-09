@@ -1,4 +1,3 @@
-import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Widgets/custom_appbar.dart';
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:call/Features/Home/presentation/view/widgets/floating_icon.dart';
@@ -18,6 +17,7 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     BlocProvider.of<AuthCubit>(context).getProfile();
+    BlocProvider.of<AuthCubit>(context).checkInternet(context);
   }
 
   @override

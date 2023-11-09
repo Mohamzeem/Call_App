@@ -12,8 +12,8 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isOnline;
   final String photoUrl;
-  final VoidCallback audio;
-  final VoidCallback video;
+  final Widget audio;
+  final Widget video;
   const ChatAppBar(
       {Key? key,
       this.title = '',
@@ -72,24 +72,34 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        InkWell(
-          onTap: audio,
-          child: Icon(
-            Icons.call_rounded,
-            color: AppColors.mainColor,
-            size: 32.r,
-          ),
-        ),
-        SizedBox(width: 10.w),
-        InkWell(
-          onTap: video,
-          child: Icon(
-            Icons.video_camera_front_rounded,
-            color: AppColors.mainColor,
-            size: 32.r,
-          ),
-        ),
-        SizedBox(width: 15.w),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            audio,
+            video,
+            SizedBox(width: 15.w),
+          ],
+        )
+
+        // InkWell(
+        //   onTap: audio,
+        //   child: Icon(
+        //     Icons.call_rounded,
+        //     color: AppColors.mainColor,
+        //     size: 32.r,
+        //   ),
+        // ),
+        // SizedBox(width: 10.w),
+
+        // InkWell(
+        //   onTap: video,
+        //   child: Icon(
+        //     Icons.video_camera_front_rounded,
+        //     color: AppColors.mainColor,
+        //     size: 32.r,
+        //   ),
+        // ),
+        // SizedBox(width: 15.w),
       ],
     );
   }

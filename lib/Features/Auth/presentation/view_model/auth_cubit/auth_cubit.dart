@@ -1,19 +1,16 @@
-import 'dart:convert';
-
-import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Services/prints/prints_service.dart';
 import 'package:call/Core/Services/shared_prefs/pref_key.dart';
 import 'package:call/Core/Services/shared_prefs/shared_pref.dart';
-import 'package:call/Core/Services/zego_services/avatar_build.dart';
 import 'package:call/Core/Utils/app_strings.dart';
+import 'package:call/Core/Widgets/custom_snack_bar.dart';
 import 'package:call/Features/Auth/data/repo/auth_repo_impl.dart';
 import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
-import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 part 'auth_state.dart';
 
@@ -21,6 +18,7 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepoImpl repo;
   AuthCubit({required this.repo}) : super(AuthInitialState());
   UserModel? userModel;
+  bool isFirstTime = true;
 
 //~ login with email and password and saver user id in sharedpreferences
   Future login({required String email, required String password}) async {
@@ -33,16 +31,14 @@ class AuthCubit extends Cubit<AuthState> {
         (failure) => emit(
             LoginWithEmailPasswordFailureState(errMessage: failure.toString())),
         (user) async {
-//^ save user Id in shared pref..
-      SharedPref().setString(key: PrefKeys.userId, stringValue: user.user!.uid);
+      SharedPref().setString(
+          key: PrefKeys.userId,
+          stringValue: user.user!.uid); //* save user Id in shared pref
       AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
-      await repo.updateUserStatus();
-      await getProfile();
-      //~ close zego service
-      await _initZego();
-      //todo: get user profile from firebase
-//! refresh tokenFcm
-      //!  await refreshTokenFcmAndRoomId(user.user!.uid);
+      await repo.updateUserStatus(); //* update user status
+      await getProfile(); //* get profile
+//todo: refresh tokenFcm
+//!  await refreshTokenFcmAndRoomId(user.user!.uid);
       return emit(LoginWithEmailPasswordSuccessState(user: user));
     });
   }
@@ -70,11 +66,12 @@ class AuthCubit extends Cubit<AuthState> {
         (user) async {
       await repo.addGoogleUserDatatoFirebase(user.user!.uid,
           user.user!.displayName!, user.user!.email!, user.user!.photoURL!);
-//^ save user Id in shared pref..
-      SharedPref().setString(key: PrefKeys.userId, stringValue: user.user!.uid);
+      SharedPref().setString(
+          key: PrefKeys.userId,
+          stringValue: user.user!.uid); //* save user Id in shared pref
       AppStrings.userId = SharedPref().getString(key: PrefKeys.userId);
       Prints.success(endPoint: 'Loged in Successfully', message: '$user');
-      await repo.updateUserStatus();
+      await repo.updateUserStatus(); //* update user status
       return emit(LoginWithGoogleSuccessState(user: user));
     });
   }
@@ -92,14 +89,13 @@ class AuthCubit extends Cubit<AuthState> {
 //~log out
   Future logOut() async {
     emit(const AuthLogOutLoadingState());
-    await _logOutUpdateprofile();
+    await _logOutUpdateprofile(); //* update user status
     await FirebaseAuth.instance.signOut();
     //  await GoogleSignIn().signOut();
-    SharedPref().removePreference(key: PrefKeys.userId);
+    SharedPref().removePreference(
+        key: PrefKeys.userId); //* remove user Id in shared pref
     AppStrings.userId = '';
     Prints.success(message: "### User logout Successfully", endPoint: '');
-    //~ close zego service
-    await ZegoUIKitPrebuiltCallInvitationService().uninit();
     emit(const AuthLogOutSuccessState());
   }
 
@@ -114,34 +110,24 @@ class AuthCubit extends Cubit<AuthState> {
         .update({'isLoged': false, 'isOnline': false});
   }
 
-//~ init zego service
-  Future _initZego() async {
-    ZegoUIKitPrebuiltCallInvitationService().init(
-      appID: AppStrings.zegoAppID,
-      appSign: AppStrings.zegoAppSign,
-      userID: MyApp.currentUser!.id!,
-      userName: MyApp.currentUser!.name!,
-      notifyWhenAppRunningInBackgroundOrQuit: false,
-      plugins: [ZegoUIKitSignalingPlugin()],
-      requireConfig: (ZegoCallInvitationData data) {
-        final config = (data.invitees.length > 1)
-            ? ZegoCallType.videoCall == data.type
-                ? ZegoUIKitPrebuiltCallConfig.groupVideoCall()
-                : ZegoUIKitPrebuiltCallConfig.groupVoiceCall()
-            : ZegoCallType.videoCall == data.type
-                ? ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall()
-                : ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall();
-
-        config.avatarBuilder = avatarBuilder;
-
-        /// support minimizing, show minimizing button
-        config.topMenuBarConfig.isVisible = true;
-        config.topMenuBarConfig.buttons
-            .insert(0, ZegoMenuBarButtonName.minimizingButton);
-
-        return config;
-      },
-    );
+//~ app connection checker
+  void checkInternet(BuildContext context) {
+    InternetConnectionChecker().onStatusChange.listen((event) {
+      switch (event) {
+        case InternetConnectionStatus.connected:
+          if (isFirstTime) {
+            isFirstTime = false;
+            return;
+          }
+          CustomSnackBar.showSuccessSnackBar(
+              context: context, message: 'Internet connection is active');
+          break;
+        case InternetConnectionStatus.disconnected:
+          CustomSnackBar.showErrorSnackBar(
+              context: context, message: 'Internet connection is disconnected');
+          break;
+      }
+    });
   }
 }
 

@@ -1,5 +1,3 @@
-import 'package:call/Features/Register/data/models/user_model.dart';
-
 class AppStrings {
   AppStrings();
 

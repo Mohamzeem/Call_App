@@ -1,9 +1,6 @@
-// Flutter imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:call/Core/App/app_info.dart';
 import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 Widget avatarBuilder(

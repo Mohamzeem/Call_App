@@ -1,7 +1,6 @@
-import 'package:call/Core/App/app_info.dart';
-import 'package:call/Core/routes/app_routes.dart';
 import 'package:call/Features/Chat/presentation/view/widgets/appbar.dart';
 import 'package:call/Features/Chat/presentation/view/widgets/body.dart';
+import 'package:call/Features/Chat/presentation/view/widgets/zego_call_btn.dart';
 import 'package:call/Features/Contacts/data/models/contact_model.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +16,20 @@ class ChatView extends StatelessWidget {
           title: contactModel.name!,
           photoUrl: contactModel.photo!,
           isOnline: contactModel.isOnline!,
-          audio: () {
-            MyApp.navigation
-                .navigateTo(AppRouter.audioCallView, args: contactModel);
-          },
-          video: () => MyApp.navigation
-              .navigateTo(AppRouter.voiceCallView, args: contactModel),
+          audio: ZegoCallButton(
+            contactId: contactModel.id!,
+            contactname: contactModel.name!,
+            isVideoCall: false,
+          ),
+          //  () => MyApp.navigation
+          //     .navigateTo(AppRouter.audioCallView, args: contactModel),
+          video: ZegoCallButton(
+            contactId: contactModel.id!,
+            contactname: contactModel.name!,
+            isVideoCall: true,
+          ),
+          // () => MyApp.navigation
+          //     .navigateTo(AppRouter.voiceCallView, args: contactModel),
         ),
         body: const ChatBody(),
       ),

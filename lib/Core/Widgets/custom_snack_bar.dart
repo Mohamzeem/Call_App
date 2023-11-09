@@ -10,13 +10,7 @@ class CustomSnackBar {
         elevation: 8,
         duration: const Duration(seconds: 2),
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-          ),
-        ),
-        behavior: SnackBarBehavior.floating,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
         content: Center(
           child: CustomText(
             text: message,
@@ -35,13 +29,7 @@ class CustomSnackBar {
         elevation: 8,
         duration: const Duration(seconds: 2),
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-          ),
-        ),
-        behavior: SnackBarBehavior.floating,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
         content: Center(
           child: CustomText(
             text: message,
