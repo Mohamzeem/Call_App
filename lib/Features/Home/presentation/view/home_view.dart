@@ -1,3 +1,4 @@
+import 'package:call/Core/Services/zego_services/login_service.dart';
 import 'package:call/Core/Widgets/custom_appbar.dart';
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:call/Features/Home/presentation/view/widgets/floating_icon.dart';
@@ -18,6 +19,19 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
     BlocProvider.of<AuthCubit>(context).getProfile();
     BlocProvider.of<AuthCubit>(context).checkInternet(context);
+    ZegoServices().initZego(); //~ start zego service
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  // ZegoServices().initZego(); //~ start zego service
+  // }
+
+  @override
+  void dispose() {
+    ZegoServices().closeZego(); //~ close zego service
+    super.dispose();
   }
 
   @override

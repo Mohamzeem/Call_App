@@ -1,4 +1,3 @@
-import 'package:call/Core/Services/zego_services/login_service.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Features/Chat/presentation/view/widgets/field_row.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +10,6 @@ class ChatBody extends StatefulWidget {
 }
 
 class _ChatBodyState extends State<ChatBody> {
-  @override
-  void initState() {
-    super.initState();
-    initZego();
-  }
-
-  @override
-  void dispose() {
-    closeZego();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(

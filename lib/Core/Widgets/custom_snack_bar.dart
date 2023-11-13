@@ -27,6 +27,7 @@ class CustomSnackBar {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         elevation: 8,
+        // behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20))),
