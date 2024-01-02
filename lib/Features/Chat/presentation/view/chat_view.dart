@@ -31,7 +31,7 @@ class ChatView extends StatelessWidget {
           // () => MyApp.navigation
           //     .navigateTo(AppRouter.voiceCallView, args: contactModel),
         ),
-        body: const ChatBody(),
+        body: ChatBody(model: contactModel),
       ),
     );
   }

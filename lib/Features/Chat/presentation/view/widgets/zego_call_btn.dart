@@ -31,43 +31,43 @@ class ZegoCallButton extends StatelessWidget {
   }
 }
 
-Widget sendCallButton({
-  required bool isVideoCall,
-  required TextEditingController inviteeUsersIDTextCtrl,
-  void Function(String code, String message, List<String>)? onCallFinished,
-}) {
-  return ValueListenableBuilder<TextEditingValue>(
-    valueListenable: inviteeUsersIDTextCtrl,
-    builder: (context, inviteeUserID, _) {
-      final invitees =
-          getInvitesFromTextCtrl(inviteeUsersIDTextCtrl.text.trim());
+// Widget sendCallButton({
+//   required bool isVideoCall,
+//   required TextEditingController inviteeUsersIDTextCtrl,
+//   void Function(String code, String message, List<String>)? onCallFinished,
+// }) {
+//   return ValueListenableBuilder<TextEditingValue>(
+//     valueListenable: inviteeUsersIDTextCtrl,
+//     builder: (context, inviteeUserID, _) {
+//       final invitees =
+//           getInvitesFromTextCtrl(inviteeUsersIDTextCtrl.text.trim());
 
-      return ZegoSendCallInvitationButton(
-        isVideoCall: isVideoCall,
-        invitees: invitees,
-        resourceID: 'zego_data',
-        iconSize: const Size(40, 40),
-        buttonSize: const Size(50, 50),
-        onPressed: onCallFinished,
-      );
-    },
-  );
-}
+//       return ZegoSendCallInvitationButton(
+//         isVideoCall: isVideoCall,
+//         invitees: invitees,
+//         resourceID: 'zego_data',
+//         iconSize: const Size(40, 40),
+//         buttonSize: const Size(50, 50),
+//         onPressed: onCallFinished,
+//       );
+//     },
+//   );
+// }
 
-List<ZegoUIKitUser> getInvitesFromTextCtrl(String textCtrlText) {
-  final invitees = <ZegoUIKitUser>[];
+// List<ZegoUIKitUser> getInvitesFromTextCtrl(String textCtrlText) {
+//   final invitees = <ZegoUIKitUser>[];
 
-  final inviteeIDs = textCtrlText.trim().replaceAll('，', '');
-  inviteeIDs.split(',').forEach((inviteeUserID) {
-    if (inviteeUserID.isEmpty) {
-      return;
-    }
+//   final inviteeIDs = textCtrlText.trim().replaceAll('，', '');
+//   inviteeIDs.split(',').forEach((inviteeUserID) {
+//     if (inviteeUserID.isEmpty) {
+//       return;
+//     }
 
-    invitees.add(ZegoUIKitUser(
-      id: inviteeUserID,
-      name: 'user_$inviteeUserID',
-    ));
-  });
+//     invitees.add(ZegoUIKitUser(
+//       id: inviteeUserID,
+//       name: 'user_$inviteeUserID',
+//     ));
+//   });
 
-  return invitees;
-}
+//   return invitees;
+// }

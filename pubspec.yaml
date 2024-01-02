@@ -69,6 +69,7 @@ dependencies:
   zego_uikit: ^2.14.3
   zego_uikit_prebuilt_call: ^3.17.2
   zego_uikit_signaling_plugin: ^2.6.2
+  intl: ^0.18.1
 
 
 dev_dependencies:

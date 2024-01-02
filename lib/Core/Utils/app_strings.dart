@@ -10,6 +10,7 @@ class AppStrings {
       "https://firebasestorage.googleapis.com/v0/b/call-me-98459.appspot.com/o/icons8-account-40.png?alt=media&token=07e51d3d-b60c-4f84-ad0a-f35a747545f3";
 
   //~ Firebase Collections
+  static const String chatCollection = 'Chat';
   static const String usersCollection = 'Users';
   static const String profileDocument = 'Profile';
   static const String profileDetailsCollection = 'profileDetails';

@@ -15,7 +15,7 @@ class ContactsIcon extends StatelessWidget {
       child: const Icon(
         IconlyBold.user_3,
         size: 40,
-        color: AppColors.kBlack,
+        color: AppColors.kWhite,
       ),
     );
   }
