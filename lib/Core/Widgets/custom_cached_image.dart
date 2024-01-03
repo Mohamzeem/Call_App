@@ -28,7 +28,7 @@ class CustomCachedImage extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: AppColors.mainColor,
+            // color: AppColors.mainColor,
             width: 0.5,
           ),
           image: DecorationImage(

@@ -1,5 +1,8 @@
 import 'package:call/Core/routes/base_routes.dart';
 import 'package:call/Features/Contacts/data/models/contact_model.dart';
+import 'package:call/Features/Now%20Map/data/models/chats_model.dart';
+import 'package:call/Features/Now%20Map/presentation/view/chat_list_view.dart';
+import 'package:call/Features/Now%20Map/presentation/view/details_chat_view.dart';
 import 'package:call/Features/Voice_Call/presentation/view/voice_view.dart';
 import 'package:call/Features/Auth/presentation/view/login_view.dart';
 import 'package:call/Features/Chat/presentation/view/chat_view.dart';
@@ -22,6 +25,9 @@ abstract class AppRouter {
   static const String audioCallView = "audioCallView";
   static const String voiceCallView = "voiceCallView";
 
+  static const String chatListView = "chatListView"; //!//!
+  static const String detailsChatView = "detailsChatView"; //!//!
+
   static Route<void> onGenerateRoute(RouteSettings settings) {
     var args = settings.arguments;
     switch (settings.name) {
@@ -43,6 +49,11 @@ abstract class AppRouter {
         return BaseRoute(VoiceCallView(contactModel: args as ContactModel));
       case voiceCallView:
         return BaseRoute(VideoCallView(contactModel: args as ContactModel));
+
+      case chatListView: //!//!
+        return BaseRoute(const ChatListView()); //!//!
+      case detailsChatView: //!//!
+        return BaseRoute(DetailsChatview(item: args as ChatsModel)); //!//!
 
       default:
         return BaseRoute(const SplashView());
