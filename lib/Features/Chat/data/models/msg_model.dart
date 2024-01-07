@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ChatModel extends Equatable {
+class MessageModel extends Equatable {
   final String? senderId;
   final String? senderName;
   final String? receiverId;
@@ -8,7 +8,7 @@ class ChatModel extends Equatable {
   final String? message;
   final String? createdAt;
   final String? id;
-  const ChatModel({
+  const MessageModel({
     this.senderId,
     this.senderName,
     this.receiverId,
@@ -30,8 +30,8 @@ class ChatModel extends Equatable {
     };
   }
 
-  factory ChatModel.fromMap(Map<String, dynamic> map) {
-    return ChatModel(
+  factory MessageModel.fromMap(Map<String, dynamic> map) {
+    return MessageModel(
       senderId: map['senderId'] != null ? map['senderId'] as String : null,
       senderName:
           map['senderName'] != null ? map['senderName'] as String : null,

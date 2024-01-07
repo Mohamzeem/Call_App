@@ -1,5 +1,4 @@
 import 'package:call/Core/Enums/font_enum.dart';
-import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:call/Features/Now%20Map/presentation/view/widgets/appbar.dart';
 import 'package:call/Features/Now%20Map/presentation/view/widgets/chats_list.dart';

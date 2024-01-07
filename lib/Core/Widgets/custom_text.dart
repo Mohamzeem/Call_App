@@ -1,4 +1,3 @@
-import 'package:call/Core/Utils/font_size_scale.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -112,7 +111,7 @@ class CustomText extends StatelessWidget {
       overflow: textOverflow,
       textAlign: textAlign,
       maxLines: maxLines,
-      textScaleFactor: ScaleSize.textScaleFactor(context),
+      textScaler: TextScaler.noScaling,
     );
   }
 }

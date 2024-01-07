@@ -1,6 +1,4 @@
-import 'package:call/Core/Extensions/convert_to_string.dart';
 import 'package:call/Features/Now%20Map/data/models/chats_model.dart';
-import 'package:call/Features/Now%20Map/data/models/details_chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatsApi {
@@ -32,7 +30,7 @@ class ChatsApi {
 
   //^ add chats
   addChats() async {
-    var chat = DetailsChatModel(name: 'zemaaaa');
+    //var chat = DetailsChatModel(name: 'zemaaaa');
     var model = const ChatsModel(
       id: '01,02,2024, 23:05:38',
       photo:

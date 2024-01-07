@@ -50,10 +50,10 @@ abstract class AppRouter {
       case voiceCallView:
         return BaseRoute(VideoCallView(contactModel: args as ContactModel));
 
-      case chatListView: //!//!
-        return BaseRoute(const ChatListView()); //!//!
-      case detailsChatView: //!//!
-        return BaseRoute(DetailsChatview(item: args as ChatsModel)); //!//!
+      // case chatListView: //!//!
+      //   return BaseRoute(const ChatListView()); //!//!
+      // case detailsChatView: //!//!
+      //   return BaseRoute(DetailsChatview(item: args as ChatsModel)); //!//!
 
       default:
         return BaseRoute(const SplashView());

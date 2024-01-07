@@ -1,11 +1,8 @@
-import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_circular_loading.dart';
 import 'package:call/Core/Widgets/custom_skelton_shimmer.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
-import 'package:call/Core/routes/app_routes.dart';
-import 'package:call/Features/Contacts/presentation/view/widgets/list_item.dart';
 import 'package:call/Features/Contacts/presentation/view_model/contacts_cubit/contacts_cubit.dart';
 import 'package:call/Features/Now%20Map/presentation/view/widgets/pinned_list_item.dart';
 import 'package:flutter/material.dart';
