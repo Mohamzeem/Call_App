@@ -1,4 +1,5 @@
 import 'package:call/Core/Widgets/custom_cached_image.dart';
+import 'package:call/Core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:call/Core/App/app_info.dart';
@@ -8,6 +9,7 @@ import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:call/Core/routes/app_routes.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isArrowBack;
@@ -31,7 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: isArrowBack
           ? InkWell(
-              onTap: () => MyApp.navigation.goBack(),
+              onTap: () => GoRouter.of(context).pop(),
               child: const SizedBox(
                 child: Icon(
                   Icons.arrow_back_ios_new_rounded,
@@ -53,7 +55,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 padding: EdgeInsets.symmetric(horizontal: AppPadding().w20),
                 child: InkWell(
                   onTap: () =>
-                      MyApp.navigation.navigateTo(AppRouter.profileView),
+                      GoRouter.of(context).pushNamed(AppRoutes.profileView),
                   child: CustomCachedImage(
                     photoUrl: photoUrl,
                     // photoUrl.isEmpty

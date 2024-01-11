@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:call/Core/App/app_info.dart';
+import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 Widget avatarBuilder(
@@ -9,8 +10,9 @@ Widget avatarBuilder(
   ZegoUIKitUser? user,
   Map<String, dynamic> extraInfo,
 ) {
+  final userModel = BlocProvider.of<AuthCubit>(context).userModel;
   return CachedNetworkImage(
-    imageUrl: MyApp.currentUser!.photo!,
+    imageUrl: userModel!.photo!,
     imageBuilder: (context, imageProvider) => Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,

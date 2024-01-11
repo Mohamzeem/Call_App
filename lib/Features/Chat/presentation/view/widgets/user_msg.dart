@@ -19,10 +19,12 @@ class UserMsg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = 280;
     return Padding(
-      padding: EdgeInsets.only(bottom: 10.h),
+      padding: EdgeInsets.only(top: 10.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomCachedImage(
             width: 35,
@@ -32,7 +34,7 @@ class UserMsg extends StatelessWidget {
           ),
           SizedBox(width: 8.w),
           Container(
-            constraints: BoxConstraints(maxWidth: 260.w),
+            constraints: BoxConstraints(maxWidth: 280.h),
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.grey.shade800,
@@ -42,29 +44,21 @@ class UserMsg extends StatelessWidget {
                 bottomRight: Radius.circular(15),
               ),
             ),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: CustomText(
-                    text: msg,
-                    fontType: FontType.medium20,
-                    color: AppColors.kWhite,
-                  ),
-                ),
-                // Padding(
-                //   padding: EdgeInsets.only(top: 5.h),
-                //   child: Align(
-                //     alignment: Alignment.centerRight,
-                //     child: CustomText(
-                //       text: createdAt,
-                //       fontType: FontType.medium16,
-                //       color: Colors.grey.shade600,
-                //     ),
-                //   ),
-                // ),
-              ],
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: CustomText(
+                text: msg,
+                fontType: FontType.medium20,
+                color: AppColors.kWhite,
+              ),
             ),
+          ),
+          const Spacer(),
+          CustomText(
+            textAlign: TextAlign.end,
+            text: createdAt,
+            fontType: FontType.medium16,
+            color: Colors.grey.shade600,
           ),
         ],
       ),

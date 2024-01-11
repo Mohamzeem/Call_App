@@ -100,6 +100,6 @@ class _ChatListSearchBarState extends State<ChatListSearchBar> {
       isIconSearch = true;
     });
     BlocProvider.of<ChatsCubit>(context).searchChatByname("");
-    MyApp.navigation.unfocus();
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 }

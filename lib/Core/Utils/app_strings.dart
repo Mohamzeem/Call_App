@@ -5,6 +5,8 @@ class AppStrings {
   static String fontFamily = 'MouseMemoirs';
   static const String defaultEmail = '@gmail.com';
   static String? userId = '';
+  static String? userPhoto = '';
+  static String? userName = '';
   static String? role = '';
   static const String defaultAppPhoto =
       "https://firebasestorage.googleapis.com/v0/b/call-me-98459.appspot.com/o/icons8-account-40.png?alt=media&token=07e51d3d-b60c-4f84-ad0a-f35a747545f3";

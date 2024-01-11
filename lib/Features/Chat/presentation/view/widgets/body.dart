@@ -1,6 +1,9 @@
+import 'package:call/Core/Services/prints/prints_service.dart';
+import 'package:call/Core/Services/zego_services/login_service.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_circular_loading.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
+import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:call/Features/Chat/presentation/view/widgets/contact_msg.dart';
 import 'package:call/Features/Chat/presentation/view/widgets/user_msg.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +11,9 @@ import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Features/Chat/data/repo/chat_api.dart';
 import 'package:call/Features/Chat/presentation/view/widgets/chat_field_row.dart';
 import 'package:call/Features/Contacts/data/models/contact_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class ChatBody extends StatefulWidget {
   final ContactModel model;
@@ -23,6 +28,16 @@ class ChatBody extends StatefulWidget {
 
 class _ChatBodyState extends State<ChatBody> {
   final controller = TextEditingController();
+  final scroll = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    ZegoServices().initZego(
+      userID: AppStrings.userId!,
+      userName: AppStrings.userName!,
+    ); //~ start zego service
+  }
 
   @override
   void dispose() {
@@ -30,9 +45,11 @@ class _ChatBodyState extends State<ChatBody> {
     super.dispose();
   }
 
-  void sendMsg() async {
+  void _sendMsg(String userId, String userName) async {
     if (controller.text.isNotEmpty) {
       ChatApi().sendMessage(
+          userId: userId,
+          userName: userName,
           receiverId: widget.model.id!,
           receiverName: widget.model.name!,
           msg: controller.text);
@@ -42,11 +59,15 @@ class _ChatBodyState extends State<ChatBody> {
 
   @override
   Widget build(BuildContext context) {
+    //final userModel = BlocProvider.of<AuthCubit>(context).userModel;
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: AppPadding().w20, vertical: AppPadding().h20),
+      padding: EdgeInsets.only(
+        right: AppPadding().w20,
+        left: AppPadding().w20,
+        bottom: AppPadding().h30,
+      ),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
         children: [
           StreamBuilder(
             stream: ChatApi().getMessages(
@@ -62,17 +83,28 @@ class _ChatBodyState extends State<ChatBody> {
                 return Expanded(
                   child: ListView.builder(
                       itemCount: snapshots.data!.length,
+                      controller: scroll,
+                      reverse: true,
+                      // shrinkWrap: true,
                       itemBuilder: (context, index) {
                         var item = snapshots.data![index];
+                        DateTime inputTime =
+                            DateFormat('dd/MM/yyyy, HH:mm:ss aaa')
+                                .parse(item.createdAt!);
+
+                        String formattedTime =
+                            DateFormat('h:mm a').format(inputTime);
                         if (item.senderId! == AppStrings.userId) {
                           return UserMsg(
-                              msg: item.message!,
-                              createdAt: item.createdAt!,
-                              photoUrl: AppStrings.defaultAppPhoto);
+                            msg: item.message!,
+                            createdAt: formattedTime,
+                            photoUrl: AppStrings.userPhoto!,
+                          );
                         } else {
                           return ContactMsg(
+                            photoUrl: widget.model.photo!,
                             msg: item.message!,
-                            createdAt: item.createdAt!,
+                            createdAt: formattedTime,
                           );
                         }
                       }),
@@ -81,10 +113,14 @@ class _ChatBodyState extends State<ChatBody> {
               return const CustomText(text: 'Data');
             },
           ),
+          SizedBox(height: 15.h),
           ChatFieldRow(
             controller: controller,
             onTap: () {
-              sendMsg();
+              _sendMsg(AppStrings.userId!, AppStrings.userName!);
+              scroll.animateTo(scroll.position.minScrollExtent,
+                  duration: const Duration(microseconds: 500),
+                  curve: Curves.fastOutSlowIn);
             },
           ),
         ],

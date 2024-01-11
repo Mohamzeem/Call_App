@@ -52,7 +52,7 @@ class CustomToast {
     Function()? whenComplete,
   }) =>
       showModalBottomSheet(
-        context: MyApp.context,
+        context: context,
         isScrollControlled: true,
         backgroundColor: Colors.black.withOpacity(0.01),
         barrierColor: Colors.black.withOpacity(0.01).withOpacity(0.5),

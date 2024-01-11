@@ -3,6 +3,7 @@ import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_appbar.dart';
+import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:call/Features/Contacts/data/repo/contacts_repo_impl.dart';
 import 'package:call/Features/Contacts/presentation/view/widgets/contacts_body.dart';
 import 'package:call/Features/Contacts/presentation/view_model/contacts_cubit/contacts_cubit.dart';
@@ -15,31 +16,30 @@ class ContactsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocProvider(
-        //! cubit changed + add repImpl
-        create: (context) => ContactsCubit(repo: sl.get<ContactsRepoImpl>()),
-        child: Scaffold(
-          appBar: CustomAppBar(
-            title: 'Contacts',
-            isArrowBack: true,
-            photoUrl: MyApp.currentUser!.photo!.isEmpty
-                ? AppStrings.defaultAppPhoto
-                : MyApp.currentUser!.photo!,
+    final userModel = BlocProvider.of<AuthCubit>(context).userModel;
+    return BlocProvider(
+      //! cubit changed + add repImpl
+      create: (context) => ContactsCubit(repo: sl.get<ContactsRepoImpl>()),
+      child: Scaffold(
+        appBar: CustomAppBar(
+          title: 'Contacts',
+          isArrowBack: true,
+          photoUrl: userModel!.photo!.isEmpty
+              ? AppStrings.defaultAppPhoto
+              : userModel.photo!,
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: AppPadding().h20,
+            horizontal: AppPadding().h20,
           ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: AppPadding().h20,
-              horizontal: AppPadding().h20,
-            ),
-            child: Column(
-              children: [
-                //! body changed
-                const ContactsBody(),
-                //   const StreamBody(),
-                SizedBox(height: 20.h),
-              ],
-            ),
+          child: Column(
+            children: [
+              //! body changed
+              const ContactsBody(),
+              //   const StreamBody(),
+              SizedBox(height: 20.h),
+            ],
           ),
         ),
       ),

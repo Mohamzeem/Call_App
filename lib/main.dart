@@ -5,7 +5,6 @@ import 'package:call/Core/App/bloc_observer.dart';
 import 'package:call/Core/Services/shared_prefs/pref_key.dart';
 import 'package:call/Core/Services/shared_prefs/shared_pref.dart';
 import 'package:call/Core/Utils/app_strings.dart';
-import 'package:call/Core/routes/app_navigation.dart';
 import 'package:call/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +21,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Bloc.observer = AppBlocObserver();
 
-  ZegoUIKitPrebuiltCallInvitationService()
-      .setNavigatorKey(sl.get<AppNavigation>().navigatorKey);
+  ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(MyApp.navigatorKey);
   ZegoUIKit().initLog().then((value) {
     ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
       [ZegoUIKitSignalingPlugin()],

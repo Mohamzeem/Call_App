@@ -1,7 +1,9 @@
 import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/routes/app_routes.dart';
+import 'package:call/Core/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
 
 class ContactsIcon extends StatelessWidget {
@@ -10,7 +12,8 @@ class ContactsIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => MyApp.navigation.navigateTo(AppRouter.contactsView),
+      onPressed: () =>
+          GoRouter.of(context).pushNamed(AppRoutes.contactsView), //!
       backgroundColor: AppColors.mainColor,
       child: const Icon(
         IconlyBold.user_3,

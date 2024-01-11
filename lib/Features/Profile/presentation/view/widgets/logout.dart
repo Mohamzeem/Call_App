@@ -3,12 +3,14 @@ import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_dialog.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
+import 'package:call/Core/routes/routes.dart';
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Widgets/custom_snack_bar.dart';
 import 'package:call/Core/routes/app_routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class Logout extends StatelessWidget {
   const Logout({super.key});
@@ -32,7 +34,7 @@ class Logout extends StatelessWidget {
                 CustomSnackBar.showErrorSnackBar(
                     context: context, message: 'Log Out Failed');
               } else if (state is AuthLogOutSuccessState) {
-                MyApp.navigation.navigateAndFinish(AppRouter.loginView);
+                GoRouter.of(context).goNamed(AppRoutes.loginView);
                 CustomSnackBar.showSuccessSnackBar(
                     context: context, message: 'Loged Out Successfully');
               }

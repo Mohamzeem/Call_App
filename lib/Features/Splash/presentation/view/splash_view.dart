@@ -4,8 +4,10 @@ import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:call/Core/routes/app_routes.dart';
+import 'package:call/Core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -16,7 +18,7 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   late Timer timer;
-  _nextPage() => MyApp.navigation.navigateAndFinish(AppRouter.loginView);
+  _nextPage() => GoRouter.of(context).goNamed(AppRoutes.loginView);
   _delay() {
     timer = Timer(const Duration(seconds: 3), () => _nextPage());
   }

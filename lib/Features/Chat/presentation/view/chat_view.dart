@@ -10,9 +10,10 @@ class ChatView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: ChatAppBar(
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65),
+        child: ChatAppBar(
           title: contactModel.name!,
           photoUrl: contactModel.photo!,
           isOnline: contactModel.isOnline!,
@@ -31,8 +32,8 @@ class ChatView extends StatelessWidget {
           // () => MyApp.navigation
           //     .navigateTo(AppRouter.voiceCallView, args: contactModel),
         ),
-        body: ChatBody(model: contactModel),
       ),
+      body: ChatBody(model: contactModel),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:call/Core/Services/zego_services/login_service.dart';
+import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_appbar.dart';
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:call/Features/Home/presentation/view/widgets/floating_icon.dart';
@@ -19,42 +20,35 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
     BlocProvider.of<AuthCubit>(context).getProfile();
     BlocProvider.of<AuthCubit>(context).checkInternet(context);
-    ZegoServices().initZego(); //~ start zego service
-  }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // ZegoServices().initZego(); //~ start zego service
-  // }
+    // ZegoServices().initZego(
+    //     AppStrings.userId!, AppStrings.userPhoto!); //~ start zego service
+  }
 
   @override
   void dispose() {
-    ZegoServices().closeZego(); //~ close zego service
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65),
-          child: BlocBuilder<AuthCubit, AuthState>(
-            builder: (context, state) {
-              if (state is AuthGetProfileSuccessState) {
-                return CustomAppBar(
-                  title: 'Call Me',
-                  photoUrl: state.userModel.photo!,
-                );
-              }
-              return const CustomAppBar(title: 'Call Me');
-            },
-          ),
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(65),
+        child: BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, state) {
+            if (state is AuthGetProfileSuccessState) {
+              return CustomAppBar(
+                title: 'Call Me',
+                photoUrl: state.userModel.photo!,
+              );
+            }
+            return const CustomAppBar(title: 'Call Me');
+          },
         ),
-        floatingActionButton: const ContactsIcon(),
-        body: const HomeBody(),
       ),
+      floatingActionButton: const ContactsIcon(),
+      body: const HomeBody(),
     );
   }
 }

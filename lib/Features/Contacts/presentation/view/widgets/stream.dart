@@ -5,11 +5,13 @@ import 'package:call/Core/Widgets/custom_circular_loading.dart';
 import 'package:call/Core/Widgets/custom_error_loading.dart';
 import 'package:call/Core/Widgets/custom_skelton_shimmer.dart';
 import 'package:call/Core/routes/app_routes.dart';
+import 'package:call/Core/routes/routes.dart';
 import 'package:call/Features/Contacts/presentation/view/widgets/list_item.dart';
 import 'package:call/Features/Register/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class StreamBody extends StatefulWidget {
   const StreamBody({super.key});
@@ -72,8 +74,8 @@ class _StreamBodyState extends State<StreamBody> {
                   return SizedBox(height: 0.h);
                 }
                 return ListItem(
-                  onTap: () => MyApp.navigation
-                      .navigateTo(AppRouter.contactDetailsView, args: item),
+                  onTap: () => GoRouter.of(context)
+                      .pushNamed(AppRoutes.chatView, extra: item), //!
                   photoUrl: item['photo'],
                   isOnline: item['isOnline'],
                   name: item['name'],

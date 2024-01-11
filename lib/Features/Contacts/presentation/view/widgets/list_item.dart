@@ -7,6 +7,7 @@ import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Widgets/custom_cached_image.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
+import 'package:go_router/go_router.dart';
 
 class ListItem extends StatelessWidget {
   final String photoUrl;
@@ -52,10 +53,10 @@ class ListItem extends StatelessWidget {
                           Align(
                             alignment: Alignment.topRight,
                             child: InkWell(
-                              onTap: () => MyApp.navigation.goBack(),
+                              onTap: () => GoRouter.of(context).pop(), //!
                               child: CustomTextButton(
                                 text: 'close',
-                                onPressed: () => MyApp.navigation.goBack(),
+                                onPressed: () => GoRouter.of(context).pop(), //!
                                 underline: TextDecoration.none,
                               ),
                             ),

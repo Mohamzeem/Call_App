@@ -1,6 +1,7 @@
 import 'package:call/Core/Services/prints/prints_service.dart';
 import 'package:call/Core/Services/shared_prefs/pref_key.dart';
 import 'package:call/Core/Services/shared_prefs/shared_pref.dart';
+import 'package:call/Core/Services/zego_services/login_service.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_snack_bar.dart';
 import 'package:call/Features/Auth/data/repo/auth_repo_impl.dart';
@@ -51,6 +52,14 @@ class AuthCubit extends Cubit<AuthState> {
       (failure) => emit(AuthGetProfileFailureState(errMessage: failure)),
       (profile) {
         userModel = profile;
+        SharedPref().setString(
+            key: PrefKeys.userPhoto,
+            stringValue: profile.photo!); //* save user Id in shared pref
+        AppStrings.userPhoto = SharedPref().getString(key: PrefKeys.userPhoto);
+        SharedPref().setString(
+            key: PrefKeys.userName,
+            stringValue: profile.name!); //* save user Id in shared pref
+        AppStrings.userName = SharedPref().getString(key: PrefKeys.userName);
         emit(AuthGetProfileSuccessState(userModel: profile));
       },
     );
@@ -96,6 +105,7 @@ class AuthCubit extends Cubit<AuthState> {
         key: PrefKeys.userId); //* remove user Id in shared pref
     AppStrings.userId = '';
     Prints.success(message: "### User logout Successfully", endPoint: '');
+    ZegoServices().closeZego(); //~ close zego service
     emit(const AuthLogOutSuccessState());
   }
 

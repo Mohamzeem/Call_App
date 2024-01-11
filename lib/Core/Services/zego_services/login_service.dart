@@ -8,17 +8,26 @@ class ZegoServices {
   ZegoUIKitPrebuiltCallController? callController;
 
   //~ init zego service
-  Future initZego() async {
+  Future initZego({required String userID, required String userName}) async {
     // callController ??= ZegoUIKitPrebuiltCallController();
 
     ZegoUIKitPrebuiltCallInvitationService().init(
       appID: AppStrings.zegoAppID,
       appSign: AppStrings.zegoAppSign,
-      userID: MyApp.currentUser!.id!,
-      userName: MyApp.currentUser!.name!,
-      notifyWhenAppRunningInBackgroundOrQuit: false,
-      controller: callController,
+      userID: userID,
+      userName: userName,
+      notifyWhenAppRunningInBackgroundOrQuit: true,
       plugins: [ZegoUIKitSignalingPlugin()],
+      androidNotificationConfig: ZegoAndroidNotificationConfig(
+        channelID: "ZegoUIKit",
+        channelName: "Call Notifications",
+        sound: "notification",
+      ),
+      iOSNotificationConfig: ZegoIOSNotificationConfig(
+        systemCallingIconName: 'CallKitIcon',
+        isSandboxEnvironment: true,
+      ),
+      controller: callController,
       requireConfig: (ZegoCallInvitationData data) {
         final config = (data.invitees.length > 1)
             ? ZegoCallType.videoCall == data.type

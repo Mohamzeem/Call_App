@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
+import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfilePhoto extends StatelessWidget {
@@ -11,15 +12,16 @@ class ProfilePhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userModel = BlocProvider.of<AuthCubit>(context).userModel;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: AppPadding().h20),
       child: Center(
         child: InkWell(
           onTap: () {},
           child: CachedNetworkImage(
-            imageUrl: MyApp.currentUser!.photo!.isEmpty
+            imageUrl: userModel!.photo!.isEmpty
                 ? AppStrings.defaultAppPhoto
-                : MyApp.currentUser!.photo!,
+                : userModel.photo!,
             fit: BoxFit.fill,
             imageBuilder: (context, imageProvider) => Container(
               width: 120.h,

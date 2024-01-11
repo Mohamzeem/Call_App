@@ -7,6 +7,7 @@ import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatListBar extends StatelessWidget {
   final String title;
@@ -30,7 +31,7 @@ class ChatListBar extends StatelessWidget {
             children: [
               //^ arrow back
               InkWell(
-                onTap: () => MyApp.navigation.goBack(),
+                onTap: () => GoRouter.of(context).pop(),
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,

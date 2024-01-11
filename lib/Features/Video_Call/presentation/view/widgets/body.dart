@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_cached_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class VideoCallBody extends StatefulWidget {
   final String photoUrl;
@@ -54,7 +55,7 @@ class _VideoCallBodyState extends State<VideoCallBody> {
           const Spacer(),
           VoiceCallButtonsRow(
             callButton: () {
-              MyApp.navigation.goBack();
+              GoRouter.of(context).pop();
             },
             micButton: () async {
               Prints.route('White foreground with a peach background');

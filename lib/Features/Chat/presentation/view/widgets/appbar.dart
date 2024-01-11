@@ -7,6 +7,7 @@ import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -29,7 +30,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: InkWell(
-        onTap: () => MyApp.navigation.goBack(),
+        onTap: () => GoRouter.of(context).pop(), //!
         child: const SizedBox(
           child: Icon(
             Icons.arrow_back_ios_new_rounded,
@@ -37,30 +38,30 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      flexibleSpace: Row(
+      title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(width: 43.w),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppPadding().w10),
-            child: CustomCachedImage(
-              photoUrl:
-                  photoUrl.isEmpty ? AppStrings.defaultAppPhoto : photoUrl,
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: isOnline ? AppColors.kGreen : AppColors.kGrey3,
-                  ),
-                  height: 15.h,
-                  width: 15.w,
-                ),
-              ),
-            ),
-          ),
+          // SizedBox(width: 43.w),
+          // Padding(
+          //   padding: EdgeInsets.only(right: 10.w),
+          //   child: CustomCachedImage(
+          //     photoUrl:
+          //         photoUrl.isEmpty ? AppStrings.defaultAppPhoto : photoUrl,
+          //     child: Align(
+          //       alignment: Alignment.bottomRight,
+          //       child: Container(
+          //         decoration: BoxDecoration(
+          //           shape: BoxShape.circle,
+          //           color: isOnline ? AppColors.kGreen : AppColors.kGrey3,
+          //         ),
+          //         height: 15.h,
+          //         width: 15.w,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           SizedBox(
-            width: 220,
+            // width: 200,
             child: CustomText(
               text: title,
               softWrap: false,

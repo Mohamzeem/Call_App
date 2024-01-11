@@ -1,14 +1,14 @@
-import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_button.dart';
 import 'package:call/Core/Widgets/custom_snack_bar.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
-import 'package:call/Core/routes/app_routes.dart';
+import 'package:call/Core/routes/routes.dart';
 import 'package:call/Features/Register/presentation/view/widgets/text_form_field.dart';
 import 'package:call/Features/Register/presentation/view_model/register_cubit/register_cubit.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterBody extends StatelessWidget {
   const RegisterBody({Key? key}) : super(key: key);
@@ -57,7 +57,7 @@ class _LoginButtonsState extends State<LoginButtons> {
         if (state is RegisterSuccessState) {
           CustomSnackBar.showSuccessSnackBar(
               context: context, message: 'Registerd Successfully');
-          MyApp.navigation.navigateAndFinish(AppRouter.loginView);
+          GoRouter.of(context).replaceNamed(AppRoutes.loginView);
         } else if (state is RegisterFailureState) {
           CustomSnackBar.showErrorSnackBar(
               context: context, message: state.errMessage);
@@ -152,7 +152,7 @@ class _LoginButtonsState extends State<LoginButtons> {
                 ),
                 CustomButton(
                   onPressed: () =>
-                      MyApp.navigation.navigateTo(AppRouter.loginView),
+                      GoRouter.of(context).pushNamed(AppRoutes.loginView),
                   text: 'Back',
                   width: 100,
                   height: 40,

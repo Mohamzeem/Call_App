@@ -1,5 +1,6 @@
 import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/routes/app_routes.dart';
+import 'package:call/Core/routes/routes.dart';
 import 'package:call/Features/Auth/presentation/view/widgets/facebook_google_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:call/Core/Widgets/custom_text_button.dart';
 import 'package:call/Features/Auth/presentation/view/widgets/text_form_field.dart';
 import 'package:call/Features/Auth/presentation/view_model/auth_cubit/auth_cubit.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
@@ -50,7 +52,8 @@ class _LoginBodyState extends State<LoginBody> {
             state is LoginWithGoogleSuccessState) {
           CustomSnackBar.showSuccessSnackBar(
               context: context, message: 'loged in Successfully');
-          MyApp.navigation.navigateAndFinish(AppRouter.homeView);
+          GoRouter.of(context).replaceNamed(AppRoutes.homeView); //!
+          // MyApp.navigation.navigateAndFinish(AppRouter.homeView);
         } else if (state is LoginWithEmailPasswordFailureState) {
           CustomSnackBar.showErrorSnackBar(
               context: context, message: state.errMessage);
@@ -189,8 +192,8 @@ class _LoginBodyState extends State<LoginBody> {
                           ),
                           CustomTextButton(
                             text: 'Sign Up!',
-                            onPressed: () => MyApp.navigation
-                                .navigateTo(AppRouter.registerView),
+                            onPressed: () => GoRouter.of(context)
+                                .goNamed(AppRoutes.registerView),
                           ),
                         ],
                       )

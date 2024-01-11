@@ -5,6 +5,7 @@ import 'package:call/Core/Widgets/custom_text.dart';
 import 'package:call/Core/Widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomShowDialog {
   static Future oneButtonDialog({
@@ -70,7 +71,7 @@ class CustomShowDialog {
               ),
               CustomTextButton(
                 text: isLoading ? 'loading...' : textButton2,
-                onPressed: () => MyApp.navigation.goBack(),
+                onPressed: () => GoRouter.of(context).pop(),
                 underline: TextDecoration.none,
               ),
             ],

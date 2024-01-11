@@ -11,6 +11,7 @@ import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Widgets/custom_cached_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class VoiceCallBody extends StatefulWidget {
   final String photoUrl;
@@ -90,7 +91,7 @@ class _VoiceCallBodyState extends State<VoiceCallBody> {
                 },
                 callButton: () {
                   cubit.leaveVoiceCall();
-                  MyApp.navigation.goBack();
+                  GoRouter.of(context).pop();
                   // debugPrint('#### go back');
                   cubit.editIsCalling();
                   // debugPrint('#### ${cubit.isCalling}');

@@ -1,4 +1,3 @@
-import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Extensions/convert_to_string.dart';
 import 'package:call/Core/Utils/app_colors.dart';
@@ -6,7 +5,6 @@ import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_circular_loading.dart';
 import 'package:call/Core/Widgets/custom_skelton_shimmer.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
-import 'package:call/Core/routes/app_routes.dart';
 import 'package:call/Features/Now%20Map/presentation/view/widgets/chats_item.dart';
 import 'package:call/Features/Now%20Map/presentation/view_model.dart/cubit/chats_cubit.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +42,7 @@ class _ChatsListState extends State<ChatsList> {
                   name: item.name!,
                   createdAt: DateTime.parse(item.createdAt!)
                       .timeAgo(numericDates: true),
-                  onTap: () => MyApp.navigation
-                      .navigateTo(AppRouter.detailsChatView, args: item),
+                  onTap: () {},
                 );
               },
               itemCount: state.allChats.length,
@@ -77,8 +74,7 @@ class _ChatsListState extends State<ChatsList> {
                   name: item.name!,
                   createdAt: DateTime.parse(item.createdAt!)
                       .timeAgo(numericDates: true),
-                  onTap: () => MyApp.navigation
-                      .navigateTo(AppRouter.detailsChatView, args: item),
+                  onTap: () {},
                 );
               },
               itemCount: state.searchedList.length,

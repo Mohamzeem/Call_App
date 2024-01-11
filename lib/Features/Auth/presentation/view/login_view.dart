@@ -11,10 +11,8 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        body: LoginBody(),
-      ),
+    return const Scaffold(
+      body: LoginBody(),
     );
   }
 }
