@@ -19,43 +19,46 @@ class UserMsg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = 280;
     return Padding(
       padding: EdgeInsets.only(top: 10.h),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          CustomCachedImage(
-            width: 35,
-            height: 35,
-            photoUrl: photoUrl,
-            child: Container(),
-          ),
-          SizedBox(width: 8.w),
-          Container(
-            constraints: BoxConstraints(maxWidth: 280.h),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade800,
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(15),
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15),
-              ),
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomCachedImage(
+                  width: 35,
+                  height: 35,
+                  photoUrl: photoUrl,
+                  child: Container(),
+                ),
+                SizedBox(width: 8.w),
+                Container(
+                  constraints: BoxConstraints(maxWidth: 280.h),
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade800,
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15),
+                    ),
+                  ),
+                  child: CustomText(
+                    text: msg,
+                    fontType: FontType.medium20,
+                    color: AppColors.kWhite,
+                  ),
+                ),
+              ],
             ),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: CustomText(
-                text: msg,
-                fontType: FontType.medium20,
-                color: AppColors.kWhite,
-              ),
-            ),
           ),
-          const Spacer(),
           CustomText(
-            textAlign: TextAlign.end,
+            // textAlign: TextAlign.end,
             text: createdAt,
             fontType: FontType.medium16,
             color: Colors.grey.shade600,

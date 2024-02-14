@@ -1,5 +1,4 @@
 import 'package:call/Core/App/app_info.dart';
-import 'package:call/Core/Services/prints/prints_service.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Features/Auth/presentation/view/login_view.dart';
 import 'package:call/Features/Chat/presentation/view/chat_view.dart';
@@ -20,8 +19,6 @@ class AppRoutes {
   static const String profileView = "profileView";
   static const String contactsView = "contactsView";
   static const String chatView = "chatView";
-  static const String audioCallView = "audioCallView";
-  static const String voiceCallView = "voiceCallView";
 
   final GoRouter router = GoRouter(
     initialLocation: AppStrings.userId != null ? "/homeView" : "/loginView",
@@ -31,7 +28,7 @@ class AppRoutes {
         path: "/splashView",
         name: AppRoutes.splashView,
         pageBuilder: (context, state) {
-          Prints.route('Navigation ==> $Path');
+          //Prints.route('Navigation ==> $Path');
           return _customAnimation(const SplashView());
         },
       ),
@@ -39,18 +36,15 @@ class AppRoutes {
         path: "/loginView",
         name: AppRoutes.loginView,
         pageBuilder: (context, state) {
-          Prints.route('Navigation ==> $Path');
+          //Prints.route('Navigation ==> $Path');
           return _customAnimation(const LoginView());
         },
       ),
       GoRoute(
         path: "/registerView",
         name: AppRoutes.registerView,
-        // builder: (context, state) {
-        //   return const RegisterView();
-        // },
         pageBuilder: (context, state) {
-          Prints.route('Navigation ==> $Path');
+          //Prints.route('Navigation ==> $Path');
           return _customAnimation(const RegisterView());
         },
       ),
@@ -58,7 +52,7 @@ class AppRoutes {
         path: "/homeView",
         name: AppRoutes.homeView,
         pageBuilder: (context, state) {
-          Prints.route('Navigation ==> $Path');
+          //Prints.route('Navigation ==> $Path');
           return _customAnimation(const HomeView());
         },
       ),
@@ -66,7 +60,7 @@ class AppRoutes {
         path: "/profileView",
         name: AppRoutes.profileView,
         pageBuilder: (context, state) {
-          Prints.route('Navigation ==> $Path');
+          //Prints.route('Navigation ==> $ProfileView');
           return _customAnimation(const ProfileView());
         },
       ),
@@ -74,7 +68,7 @@ class AppRoutes {
         path: "/contactsView",
         name: AppRoutes.contactsView,
         pageBuilder: (context, state) {
-          Prints.route('Navigation ==> $Path');
+          //Prints.route('Navigation ==> $Path');
           return _customAnimation(const ContactsView());
         },
       ),
@@ -82,7 +76,7 @@ class AppRoutes {
         path: "/chatView",
         name: AppRoutes.chatView,
         pageBuilder: (context, state) {
-          Prints.route('Navigation ==> $Path');
+          //Prints.route('Navigation ==> $Path');
           final ContactModel model = state.extra as ContactModel;
           return _customAnimation(ChatView(contactModel: model));
         },

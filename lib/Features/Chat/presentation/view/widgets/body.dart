@@ -28,7 +28,7 @@ class ChatBody extends StatefulWidget {
 
 class _ChatBodyState extends State<ChatBody> {
   final controller = TextEditingController();
-  final scroll = ScrollController();
+  var scrollController = ScrollController();
 
   @override
   void initState() {
@@ -43,6 +43,17 @@ class _ChatBodyState extends State<ChatBody> {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  void _scrollToBottom() {
+    final bottomOffset = scrollController.position.minScrollExtent;
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        bottomOffset,
+        duration: const Duration(microseconds: 500),
+        curve: Curves.fastOutSlowIn,
+      );
+    }
   }
 
   void _sendMsg(String userId, String userName) async {
@@ -83,9 +94,9 @@ class _ChatBodyState extends State<ChatBody> {
                 return Expanded(
                   child: ListView.builder(
                       itemCount: snapshots.data!.length,
-                      controller: scroll,
+                      controller: scrollController,
                       reverse: true,
-                      // shrinkWrap: true,
+                      shrinkWrap: true,
                       itemBuilder: (context, index) {
                         var item = snapshots.data![index];
                         DateTime inputTime =
@@ -118,9 +129,7 @@ class _ChatBodyState extends State<ChatBody> {
             controller: controller,
             onTap: () {
               _sendMsg(AppStrings.userId!, AppStrings.userName!);
-              scroll.animateTo(scroll.position.minScrollExtent,
-                  duration: const Duration(microseconds: 500),
-                  curve: Curves.fastOutSlowIn);
+              _scrollToBottom();
             },
           ),
         ],

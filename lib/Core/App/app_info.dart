@@ -15,13 +15,13 @@ class MyApp {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   // static BuildContext get context =>
-  //     sl.get<AppNavigation>().navigatorKey.currentContext!;
+  // sl.get<AppNavigation>().navigatorKey.currentContext!;
 
   static AppConfig get config => sl.get<AppConfig>();
 
   static String appName = 'Call Me';
   // static UserModel? get currentUser =>
-  //     BlocProvider.of<AuthCubit>(context).userModel;
+  // BlocProvider.of<AuthCubit>(context).userModel;
 
 //~ appbar states
   static void setSystemUi() {

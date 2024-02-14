@@ -22,6 +22,7 @@ class ContactMsg extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 10.h),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           CustomText(
@@ -31,11 +32,10 @@ class ContactMsg extends StatelessWidget {
           ),
           Expanded(
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
-              // crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                // const Spacer(),
                 Container(
                   constraints: BoxConstraints(maxWidth: 280.w),
                   padding: const EdgeInsets.all(8),
@@ -47,17 +47,10 @@ class ContactMsg extends StatelessWidget {
                       bottomRight: Radius.circular(15),
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: CustomText(
-                          text: msg,
-                          fontType: FontType.medium20,
-                          color: AppColors.kBlack,
-                        ),
-                      ),
-                    ],
+                  child: CustomText(
+                    text: msg,
+                    fontType: FontType.medium20,
+                    color: AppColors.kBlack,
                   ),
                 ),
                 SizedBox(width: 8.w),

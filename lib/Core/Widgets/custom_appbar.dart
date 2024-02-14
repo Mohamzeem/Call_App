@@ -2,13 +2,11 @@ import 'package:call/Core/Widgets/custom_cached_image.dart';
 import 'package:call/Core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Enums/font_enum.dart';
 import 'package:call/Core/Utils/app_colors.dart';
 import 'package:call/Core/Utils/app_padding.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Core/Widgets/custom_text.dart';
-import 'package:call/Core/routes/app_routes.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {

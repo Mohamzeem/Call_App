@@ -1,8 +1,7 @@
-import 'package:call/Core/App/app_info.dart';
 import 'package:call/Core/Utils/app_strings.dart';
 import 'package:call/Features/Chat/data/models/msg_model.dart';
+import 'package:call/Features/Home/data/models/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 class ChatApi {
@@ -36,7 +35,25 @@ class ChatApi {
         .doc(chatRoomId)
         .collection("Messages")
         .add(message.toMap());
+
+    final chat = ChatModel(
+      senderId: userId,
+      senderName: userName,
+      receiverId: receiverId,
+      receiverName: receiverName,
+      createdAt: createdAtTime,
+      id: chatRoomId,
+    );
+    await firestore
+        .collection(AppStrings.chatCollection)
+        .doc(chatRoomId)
+        .set(chat.toMap());
   }
+
+  // //^get chats
+  // Future getChats() async {
+  //   await firestore.collection(AppStrings.chatCollection).get();
+  // }
 
   //^get msgs
   Stream<List<MessageModel>> getMessages({
