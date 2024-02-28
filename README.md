@@ -1,16 +1,2 @@
-# call
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Call me is app for chatting with video and audio call, in home page u can see the chats happened before and icon for all users, u can see if user is online, see the user photo, when click in user or chat go in chat page. 
+App Implements using Flutter, Dart, Bloc, Firebase, Get_it, dartz, Equatable, Flutter_screenutil, Dependency injection, Bloc Observer, intl, Goroute, Clean Architecture, and used Zego cloud service for calls 
